@@ -1,0 +1,8 @@
+{
+  "sv": { "name": "Swedish", "direction": "ltr", "tts": "sv-SE" },
+  "en": { "name": "English", "direction": "ltr", "tts": "en-US" },
+  "fr": { "name": "French", "direction": "ltr", "tts": "fr-FR" },
+  "sq": { "name": "Albanian", "direction": "ltr", "tts": "sq-AL" },
+  "ar": { "name": "Arabic", "direction": "rtl", "tts": "ar" },
+  "ru": { "name": "Russian", "direction": "ltr", "tts": "ru-RU" }
+}

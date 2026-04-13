@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MedCom Admin Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header class="header">
+    <h1>MedCom</h1>
+    <p class="subtitle">Admin login</p>
+    <nav class="topnav">
+      <a href="{{ url_for('index') }}">Home</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <section class="card">
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endwith %}
+
+    <section class="card">
+      <h2>Admin Access</h2>
+      <form method="post">
+        <label>Username</label>
+        <input class="input" type="text" name="username" required>
+
+        <label>Password</label>
+        <input class="input" type="password" name="password" required>
+
+        <div class="actions">
+          <button class="btn" type="submit">Log in</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

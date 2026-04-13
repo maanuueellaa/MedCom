@@ -1,0 +1,24 @@
+[
+  {
+    "id": "W1",
+    "translations": {
+      "sv": "smärta",
+      "en": "pain",
+      "fr": "douleur",
+      "sq": "dhimbje",
+      "ar": "ألم",
+      "ru": "боль"
+    }
+  },
+  {
+    "id": "W2",
+    "translations": {
+      "sv": "Hjärtklappnig",
+      "en": "Palpitation",
+      "fr": "Palpitation",
+      "sq": "Palpitacion",
+      "ar": "خفقان",
+      "ru": "Сердцебиение"
+    }
+  }
+]

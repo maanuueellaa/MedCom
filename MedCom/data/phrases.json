@@ -1,0 +1,681 @@
+[
+  {
+    "id": "P1",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Hej och välkommen",
+      "en": "Hello and welcome",
+      "fr": "Bonjour et bienvenue",
+      "sq": "Përshëndetje dhe mirëseardhje",
+      "ar": "أهلا ومرحبا بكم",
+      "ru": "привет и добро пожаловать"
+    },
+    "audio": {
+      "fr": "audio/P1_fr.mp3",
+      "sv": "audio/P1_sv.mp3",
+      "en": "audio/P1_en.mp3",
+      "sq": "audio/P1_sq.mp3",
+      "ar": "audio/P1_ar.mp3",
+      "ru": "audio/P1_ru.mp3"
+    },
+    "keywords": ["greeting", "welcome", "hello"]
+  },
+  {
+    "id": "P2",
+    "category": "Heart",
+    "translations": {
+      "sv": "Jag har ont i hjärtat",
+      "en": "I have pain in my heart",
+      "fr": "J'ai mal au cœur",
+      "sq": "Kam dhimbje në zemër",
+      "ar": "أشعر بألم في قلبي",
+      "ru": "У меня болит сердце"
+    },
+    "audio": {
+      "sv": "audio/P2_sv.mp3",
+      "en": "audio/P2_en.mp3",
+      "fr": "audio/P2_fr.mp3",
+      "sq": "audio/P2_sq.mp3",
+      "ar": "audio/P2_ar.mp3",
+      "ru": "audio/P2_ru.mp3"
+    },
+    "keywords": ["heart", "pain", "chest", "hjärta", "bröst"]
+  },
+  {
+    "id": "P3",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Jag har ont i magen",
+      "en": "I have a stomach ache",
+      "fr": "J'ai mal au ventre",
+      "sq": "Më dhemb barku",
+      "ar": "أشعر بألم في بطني",
+      "ru": "У меня болит живот"
+    },
+    "audio": {
+      "sv": "audio/P3_sv.mp3",
+      "en": "audio/P3_en.mp3",
+      "fr": "audio/P3_fr.mp3",
+      "sq": "audio/P3_sq.mp3",
+      "ar": "audio/P3_ar.mp3",
+      "ru": "audio/P3_ru.mp3"
+    }
+  },
+  {
+    "id": "P4",
+    "category": "Head",
+    "translations": {
+      "sv": "Jag har ont i huvudet",
+      "en": "I have a headache",
+      "fr": "J'ai mal à la tête",
+      "sq": "Më dhemb koka",
+      "ar": "أشعر بألم في رأسي",
+      "ru": "У меня болит голова"
+    },
+    "audio": {
+      "sv": "audio/P4_sv.mp3",
+      "en": "audio/P4_en.mp3",
+      "fr": "audio/P4_fr.mp3",
+      "sq": "audio/P4_sq.mp3",
+      "ar": "audio/P4_ar.mp3",
+      "ru": "audio/P4_ru.mp3"
+    }
+  },
+  {
+    "id": "P5",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Hur kan jag hjälpa dig?",
+      "en": "How can I help you?",
+      "fr": "Comment puis-je vous aider ?",
+      "sq": "Si mund t'ju ndihmoj?",
+      "ar": "كيف يمكنني مساعدتك؟",
+      "ru": "Как я могу вам помочь?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P6",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Var har du ont?",
+      "en": "Where does it hurt?",
+      "fr": "Où avez-vous mal ?",
+      "sq": "Ku keni dhimbje?",
+      "ar": "أين تشعر بالألم؟",
+      "ru": "Где у вас болит?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P7",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Hur ont gör det från ett till tio?",
+      "en": "How bad is the pain from one to ten?",
+      "fr": "À quel point la douleur est-elle forte de un à dix ?",
+      "sq": "Sa e fortë është dhimbja nga një deri në dhjetë?",
+      "ar": "ما شدة الألم من واحد إلى عشرة؟",
+      "ru": "Насколько сильна боль по шкале от одного до десяти?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P8",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Kan du visa var det gör ont?",
+      "en": "Can you show where it hurts?",
+      "fr": "Pouvez-vous montrer où vous avez mal ?",
+      "sq": "A mund të tregoni ku ju dhemb?",
+      "ar": "هل يمكنك أن تُريني أين يؤلمك؟",
+      "ru": "Можете показать, где болит?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P9",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Behöver du hjälp nu?",
+      "en": "Do you need help now?",
+      "fr": "Avez-vous besoin d'aide maintenant ?",
+      "sq": "A keni nevojë për ndihmë tani?",
+      "ar": "هل تحتاج إلى مساعدة الآن؟",
+      "ru": "Вам нужна помощь сейчас?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P10",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Tack, vi ska hjälpa dig",
+      "en": "Thank you, we will help you",
+      "fr": "Merci, nous allons vous aider",
+      "sq": "Faleminderit, ne do t'ju ndihmojmë",
+      "ar": "شكراً، سنساعدك",
+      "ru": "Спасибо, мы вам поможем"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P11",
+    "category": "Head",
+    "translations": {
+      "sv": "Jag känner tryck i huvudet",
+      "en": "I feel pressure in my head",
+      "fr": "Je sens une pression dans la tête",
+      "sq": "Ndiej presion në kokë",
+      "ar": "أشعر بضغط في رأسي",
+      "ru": "Я чувствую давление в голове"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P12",
+    "category": "Head",
+    "translations": {
+      "sv": "Har du slagit i huvudet?",
+      "en": "Have you hit your head?",
+      "fr": "Avez-vous cogné votre tête?",
+      "sq": "A e keni goditur kokën?",
+      "ar": "هل ضربت رأسك؟",
+      "ru": "Вы ударились головой?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P13",
+    "category": "Head",
+    "translations": {
+      "sv": "Känner du dig yr?",
+      "en": "Do you feel dizzy?",
+      "fr": "Avez-vous des vertiges?",
+      "sq": "A ndiheni i/e trullosur?",
+      "ar": "هل تشعر بالدوخة؟",
+      "ru": "У вас кружится голова?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P14",
+    "category": "Brain",
+    "translations": {
+      "sv": "Jag känner mig förvirrad",
+      "en": "I feel confused",
+      "fr": "Je me sens confus",
+      "sq": "Ndihem i/e hutuar",
+      "ar": "أشعر بالارتباك",
+      "ru": "Я чувствую себя растерянно"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P15",
+    "category": "Brain",
+    "translations": {
+      "sv": "Jag har svårt att tänka klart",
+      "en": "I have trouble thinking clearly",
+      "fr": "J'ai du mal à penser clairement",
+      "sq": "E kam të vështirë të mendoj qartë",
+      "ar": "أجد صعوبة في التفكير بوضوح",
+      "ru": "Мне трудно ясно мыслить"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P16",
+    "category": "Brain",
+    "translations": {
+      "sv": "Har du svårt att minnas?",
+      "en": "Are you having memory problems?",
+      "fr": "Avez-vous des problèmes de mémoire?",
+      "sq": "A keni probleme me kujtesën?",
+      "ar": "هل لديك مشاكل في التذكر؟",
+      "ru": "У вас проблемы с памятью?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P17",
+    "category": "Brain",
+    "translations": {
+      "sv": "Har du svårt att tala?",
+      "en": "Are you having trouble speaking?",
+      "fr": "Avez-vous du mal à parler?",
+      "sq": "A keni vështirësi në të folur?",
+      "ar": "هل لديك صعوبة في الكلام؟",
+      "ru": "Вам трудно говорить?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P18",
+    "category": "Eye",
+    "translations": {
+      "sv": "Jag ser suddigt",
+      "en": "My vision is blurry",
+      "fr": "Je vois flou",
+      "sq": "Shikimi im është i paqartë",
+      "ar": "رؤيتي ضبابية",
+      "ru": "У меня затуманенное зрение"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P19",
+    "category": "Eye",
+    "translations": {
+      "sv": "Jag har ont i ögat",
+      "en": "I have pain in my eye",
+      "fr": "J'ai mal à l'œil",
+      "sq": "Kam dhimbje në sy",
+      "ar": "أشعر بألم في عيني",
+      "ru": "У меня болит глаз"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P20",
+    "category": "Eye",
+    "translations": {
+      "sv": "Har du synförändringar?",
+      "en": "Have you noticed changes in your vision?",
+      "fr": "Avez-vous remarqué des changements de vision ?",
+      "sq": "A keni vënë re ndryshime në shikim?",
+      "ar": "هل لاحظت تغيرات في الرؤية؟",
+      "ru": "Вы заметили изменения зрения?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P21",
+    "category": "Eye",
+    "translations": {
+      "sv": "Kan du öppna ögonen?",
+      "en": "Can you open your eyes?",
+      "fr": "Pouvez-vous ouvrir les yeux ?",
+      "sq": "A mund t'i hapni sytë?",
+      "ar": "هل يمكنك فتح عينيك؟",
+      "ru": "Можете открыть глаза?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P22",
+    "category": "Ears",
+    "translations": {
+      "sv": "Jag har ont i örat",
+      "en": "I have ear pain",
+      "fr": "J'ai mal à l'oreille",
+      "sq": "Kam dhimbje në vesh",
+      "ar": "أشعر بألم في أذني",
+      "ru": "У меня болит ухо"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P23",
+    "category": "Ears",
+    "translations": {
+      "sv": "Jag hör dåligt",
+      "en": "I cannot hear well",
+      "fr": "J'entends mal",
+      "sq": "Nuk dëgjoj mirë",
+      "ar": "لا أسمع جيداً",
+      "ru": "Я плохо слышу"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P24",
+    "category": "Ears",
+    "translations": {
+      "sv": "Har du ringningar i öronen?",
+      "en": "Do you have ringing in your ears?",
+      "fr": "Avez-vous des bourdonnements dans les oreilles ?",
+      "sq": "A keni zhurmë në veshë?",
+      "ar": "هل لديك طنين في الأذنين؟",
+      "ru": "У вас звенит в ушах?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P25",
+    "category": "Chest",
+    "translations": {
+      "sv": "Jag har ont i bröstet",
+      "en": "I have chest pain",
+      "fr": "J'ai mal à la poitrine",
+      "sq": "Kam dhimbje në gjoks",
+      "ar": "أشعر بألم في صدري",
+      "ru": "У меня болит в груди"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P26",
+    "category": "Chest",
+    "translations": {
+      "sv": "Det känns tungt i bröstet",
+      "en": "My chest feels heavy",
+      "fr": "J'ai une sensation de lourdeur dans la poitrine",
+      "sq": "Gjoksi më duket i rëndë",
+      "ar": "أشعر بثقل في صدري",
+      "ru": "У меня тяжесть в груди"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P27",
+    "category": "Chest",
+    "translations": {
+      "sv": "Har du svårt att andas?",
+      "en": "Are you having trouble breathing?",
+      "fr": "Avez-vous du mal à respirer ?",
+      "sq": "A keni vështirësi në frymëmarrje?",
+      "ar": "هل لديك صعوبة في التنفس؟",
+      "ru": "Вам трудно дышать?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P28",
+    "category": "Chest",
+    "translations": {
+      "sv": "Blir smärtan värre när du andas in?",
+      "en": "Does the pain get worse when you breathe in?",
+      "fr": "La douleur s'aggrave-t-elle quand vous inspirez ?",
+      "sq": "A përkeqësohet dhimbja kur merrni frymë?",
+      "ar": "هل يزداد الألم عندما تأخذ نفساً؟",
+      "ru": "Боль усиливается при вдохе?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P29",
+    "category": "Heart",
+    "translations": {
+      "sv": "Mitt hjärta slår snabbt",
+      "en": "My heart is beating fast",
+      "fr": "Mon cœur bat vite",
+      "sq": "Zemra më rreh shpejt",
+      "ar": "قلبي ينبض بسرعة",
+      "ru": "У меня быстро бьется сердце"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P30",
+    "category": "Heart",
+    "translations": {
+      "sv": "Jag känner hjärtklappning",
+      "en": "I feel palpitations",
+      "fr": "J'ai des palpitations",
+      "sq": "Kam rrahje zemre",
+      "ar": "أشعر بخفقان في القلب",
+      "ru": "Я чувствую сердцебиение"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P31",
+    "category": "Heart",
+    "translations": {
+      "sv": "Har du haft hjärtproblem tidigare?",
+      "en": "Have you had heart problems before?",
+      "fr": "Avez-vous déjà eu des problèmes cardiaques ?",
+      "sq": "A keni pasur probleme me zemrën më parë?",
+      "ar": "هل سبق أن عانيت من مشاكل في القلب؟",
+      "ru": "У вас раньше были проблемы с сердцем?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P32",
+    "category": "Heart",
+    "translations": {
+      "sv": "Strålar smärtan ut i armen?",
+      "en": "Does the pain spread to your arm?",
+      "fr": "La douleur se propage-t-elle dans le bras ?",
+      "sq": "A përhapet dhimbja në krah?",
+      "ar": "هل يمتد الألم إلى ذراعك؟",
+      "ru": "Боль отдает в руку?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P33",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Jag mår illa",
+      "en": "I feel nauseous",
+      "fr": "J'ai la nausée",
+      "sq": "Më vjen për të vjellë",
+      "ar": "أشعر بالغثيان",
+      "ru": "Меня тошнит"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P34",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Har du kräkts?",
+      "en": "Have you vomited?",
+      "fr": "Avez-vous vomi ?",
+      "sq": "A keni vjellë?",
+      "ar": "هل تقيأت؟",
+      "ru": "Вас рвало?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P35",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Har du diarré?",
+      "en": "Do you have diarrhea?",
+      "fr": "Avez-vous la diarrhée ?",
+      "sq": "A keni diarre?",
+      "ar": "هل لديك إسهال؟",
+      "ru": "У вас диарея?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P36",
+    "category": "Back",
+    "translations": {
+      "sv": "Jag har ont i ryggen",
+      "en": "I have back pain",
+      "fr": "J'ai mal au dos",
+      "sq": "Kam dhimbje në shpinë",
+      "ar": "أشعر بألم في ظهري",
+      "ru": "У меня болит спина"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P37",
+    "category": "Back",
+    "translations": {
+      "sv": "Jag kan inte böja mig",
+      "en": "I cannot bend forward",
+      "fr": "Je ne peux pas me pencher",
+      "sq": "Nuk mund të përkulem",
+      "ar": "لا أستطيع الانحناء",
+      "ru": "Я не могу наклониться"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P38",
+    "category": "Back",
+    "translations": {
+      "sv": "Gör det ont när du rör dig?",
+      "en": "Does it hurt when you move?",
+      "fr": "Avez-vous mal quand vous bougez ?",
+      "sq": "A ju dhemb kur lëvizni?",
+      "ar": "هل يؤلمك عندما تتحرك؟",
+      "ru": "Больно, когда вы двигаетесь?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P39",
+    "category": "Back",
+    "translations": {
+      "sv": "Har du domningar i ryggen eller benen?",
+      "en": "Do you have numbness in your back or legs?",
+      "fr": "Avez-vous un engourdissement dans le dos ou les jambes ?",
+      "sq": "A keni mpirje në shpinë ose këmbë?",
+      "ar": "هل لديك خدر في ظهرك أو ساقيك؟",
+      "ru": "Есть ли у вас онемение в спине или ногах?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P40",
+    "category": "Arm",
+    "translations": {
+      "sv": "Jag har ont i armen",
+      "en": "I have arm pain",
+      "fr": "J'ai mal au bras",
+      "sq": "Kam dhimbje në krah",
+      "ar": "أشعر بألم في ذراعي",
+      "ru": "У меня болит рука"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P41",
+    "category": "Arm",
+    "translations": {
+      "sv": "Jag kan inte lyfta armen",
+      "en": "I cannot lift my arm",
+      "fr": "Je ne peux pas lever le bras",
+      "sq": "Nuk mund ta ngre krahun",
+      "ar": "لا أستطيع رفع ذراعي",
+      "ru": "Я не могу поднять руку"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P42",
+    "category": "Arm",
+    "translations": {
+      "sv": "Vilken arm gör ont?",
+      "en": "Which arm hurts?",
+      "fr": "Quel bras vous fait mal ?",
+      "sq": "Cili krah ju dhemb?",
+      "ar": "أي ذراع يؤلمك؟",
+      "ru": "Какая рука болит?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P43",
+    "category": "Hand",
+    "translations": {
+      "sv": "Jag har ont i handen",
+      "en": "I have hand pain",
+      "fr": "J'ai mal à la main",
+      "sq": "Kam dhimbje në dorë",
+      "ar": "أشعر بألم في يدي",
+      "ru": "У меня болит кисть"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P44",
+    "category": "Hand",
+    "translations": {
+      "sv": "Jag kan inte greppa ordentligt",
+      "en": "I cannot grip properly",
+      "fr": "Je ne peux pas bien saisir",
+      "sq": "Nuk mund të kap mirë",
+      "ar": "لا أستطيع الإمساك جيداً",
+      "ru": "Я не могу нормально сжимать руку"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P45",
+    "category": "Hand",
+    "translations": {
+      "sv": "Har du stickningar i handen?",
+      "en": "Do you have tingling in your hand?",
+      "fr": "Avez-vous des picotements dans la main ?",
+      "sq": "A keni shpime në dorë?",
+      "ar": "هل تشعر بوخز في يدك؟",
+      "ru": "У вас покалывание в кисти?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P46",
+    "category": "Leg",
+    "translations": {
+      "sv": "Jag har ont i benet",
+      "en": "I have leg pain",
+      "fr": "J'ai mal à la jambe",
+      "sq": "Kam dhimbje në këmbë",
+      "ar": "أشعر بألم في ساقي",
+      "ru": "У меня болит нога"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P47",
+    "category": "Leg",
+    "translations": {
+      "sv": "Jag kan inte gå ordentligt",
+      "en": "I cannot walk properly",
+      "fr": "Je ne peux pas marcher correctement",
+      "sq": "Nuk mund të ec siç duhet",
+      "ar": "لا أستطيع المشي بشكل طبيعي",
+      "ru": "Я не могу нормально ходить"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P48",
+    "category": "Leg",
+    "translations": {
+      "sv": "Är benet svullet?",
+      "en": "Is the leg swollen?",
+      "fr": "La jambe est-elle enflée ?",
+      "sq": "A është këmba e ënjtur?",
+      "ar": "هل ساقك متورمة؟",
+      "ru": "Нога опухла?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P49",
+    "category": "Leg",
+    "translations": {
+      "sv": "Kan du stödja på benet?",
+      "en": "Can you put weight on the leg?",
+      "fr": "Pouvez-vous prendre appui sur la jambe ?",
+      "sq": "A mund të mbështeteni në këmbë?",
+      "ar": "هل يمكنك أن تحمل وزنك على ساقك؟",
+      "ru": "Можете опираться на ногу?"
+    },
+    "audio": {}
+  },
+  {
+    "id": "P50",
+    "translations": {
+      "sv": "Jag har ont överallt",
+      "en": "I have pain everywhere",
+      "fr": "J'ai mal partout",
+      "sq": "Kam dhimbje kudo",
+      "ar": "أشعر بألم في كل مكان",
+      "ru": "У меня болит везде"
+    },
+    "audio": {}
+  }
+]

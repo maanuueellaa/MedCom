@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MedCom – Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header class="header">
+    <h1>Admin</h1>
+    <p class="subtitle">Manage phrases and words</p>
+    <nav class="topnav">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('admin_logout') }}">Log out</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <section class="card">
+          {% for category, msg in messages %}
+            <div class="flash {{ category }}">{{ msg }}</div>
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endwith %}
+
+    <section class="card">
+      <h2>Add phrase</h2>
+      <form method="post" action="{{ url_for('add_phrase') }}">
+        <div class="grid-2">
+          <div>
+            <label>ID</label>
+            <input class="input" name="id" required placeholder="P10" />
+          </div>
+          <div>
+            <label>Category</label>
+            <input class="input" name="category" required placeholder="Pain" />
+          </div>
+        </div>
+
+        <label>Keywords (comma separated)</label>
+        <input class="input" name="keywords" placeholder="pain, stomach, fever" />
+
+        <h3>Translations</h3>
+        {% for code, info in languages.items() %}
+          <div class="grid-2">
+            <div>
+              <label>{{ info.name }} ({{ code }})</label>
+              <input class="input" name="t_{{ code }}" placeholder="Text..." />
+            </div>
+            <div>
+              <label>Audio path (optional)</label>
+              <input class="input" name="a_{{ code }}" placeholder="audio/P10_{{ code }}.mp3" />
+            </div>
+          </div>
+        {% endfor %}
+
+        <button class="btn" type="submit">Add phrase</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Current phrases</h2>
+      <div class="admin-list">
+        {% for phrase in phrases %}
+          <div class="admin-item">
+            <div>
+              <strong>{{ phrase.id }}</strong>
+              <div class="admin-meta">{{ phrase.category or 'Other' }}</div>
+              <div class="admin-meta">{{ phrase.translations.get('en') or phrase.translations.values() | list | first }}</div>
+            </div>
+            <form method="post" action="{{ url_for('delete_phrase') }}" onsubmit="return confirm('Delete phrase {{ phrase.id }}?');">
+              <input type="hidden" name="id" value="{{ phrase.id }}">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Add word</h2>
+      <form method="post" action="{{ url_for('add_word') }}">
+        <label>ID</label>
+        <input class="input" name="id" required placeholder="W10" />
+
+        <h3>Translations</h3>
+        {% for code, info in languages.items() %}
+          <label>{{ info.name }} ({{ code }})</label>
+          <input class="input" name="t_{{ code }}" placeholder="Word..." />
+        {% endfor %}
+
+        <button class="btn" type="submit">Add word</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Current words</h2>
+      <div class="admin-list">
+        {% for word in words %}
+          <div class="admin-item">
+            <div>
+              <strong>{{ word.id }}</strong>
+              <div class="admin-meta">{{ word.translations.get('en') or word.translations.values() | list | first }}</div>
+            </div>
+            <form method="post" action="{{ url_for('delete_word') }}" onsubmit="return confirm('Delete word {{ word.id }}?');">
+              <input type="hidden" name="id" value="{{ word.id }}">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>
