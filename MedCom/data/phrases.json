@@ -677,5 +677,705 @@
       "ru": "У меня болит везде"
     },
     "audio": {}
+  },
+  {
+    "id": "P51",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Kan du berätta vad som har hänt?",
+      "en": "Can you tell me what happened?",
+      "fr": "Pouvez-vous me dire ce qui s'est passé ?",
+      "sq": "A mund të më tregoni çfarë ka ndodhur?",
+      "ar": "هل يمكنك أن تخبرني ماذا حدث؟",
+      "ru": "Можете рассказать, что случилось?"
+    },
+    "audio": {},
+    "keywords": ["what happened", "happened", "help", "situation"]
+  },
+  {
+    "id": "P52",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Jag behöver en läkare",
+      "en": "I need a doctor",
+      "fr": "J'ai besoin d'un médecin",
+      "sq": "Kam nevojë për një mjek",
+      "ar": "أحتاج إلى طبيب",
+      "ru": "Мне нужен врач"
+    },
+    "audio": {},
+    "keywords": ["doctor", "need doctor", "help", "läkare"]
+  },
+  {
+    "id": "P53",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Jag behöver en sjuksköterska",
+      "en": "I need a nurse",
+      "fr": "J'ai besoin d'un infirmier",
+      "sq": "Kam nevojë për një infermier",
+      "ar": "أحتاج إلى ممرض",
+      "ru": "Мне нужна медсестра"
+    },
+    "audio": {},
+    "keywords": ["nurse", "need nurse", "help", "sjuksköterska"]
+  },
+  {
+    "id": "P54",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Förstår du mig?",
+      "en": "Do you understand me?",
+      "fr": "Me comprenez-vous ?",
+      "sq": "A më kuptoni?",
+      "ar": "هل تفهمني؟",
+      "ru": "Вы меня понимаете?"
+    },
+    "audio": {},
+    "keywords": ["understand", "communication", "förstår"]
+  },
+  {
+    "id": "P55",
+    "category": "Greetings",
+    "translations": {
+      "sv": "Jag förstår inte",
+      "en": "I do not understand",
+      "fr": "Je ne comprends pas",
+      "sq": "Nuk kuptoj",
+      "ar": "أنا لا أفهم",
+      "ru": "Я не понимаю"
+    },
+    "audio": {},
+    "keywords": ["do not understand", "understand", "förstår inte"]
+  },
+  {
+    "id": "P56",
+    "category": "Head",
+    "translations": {
+      "sv": "Smärtan i huvudet kom plötsligt",
+      "en": "The pain in my head started suddenly",
+      "fr": "La douleur à la tête a commencé soudainement",
+      "sq": "Dhimbja në kokë filloi papritur",
+      "ar": "بدأ الألم في رأسي فجأة",
+      "ru": "Боль в голове началась внезапно"
+    },
+    "audio": {},
+    "keywords": ["head", "suddenly", "pain", "headache"]
+  },
+  {
+    "id": "P57",
+    "category": "Head",
+    "translations": {
+      "sv": "Jag känner mig svimfärdig",
+      "en": "I feel like I might faint",
+      "fr": "J'ai l'impression que je vais m'évanouir",
+      "sq": "Ndihem sikur do të bie të fikët",
+      "ar": "أشعر أنني سأفقد الوعي",
+      "ru": "Мне кажется, что я сейчас упаду в обморок"
+    },
+    "audio": {},
+    "keywords": ["faint", "dizzy", "head", "svimfärdig"]
+  },
+  {
+    "id": "P58",
+    "category": "Head",
+    "translations": {
+      "sv": "Har du huvudvärk just nu?",
+      "en": "Do you have a headache right now?",
+      "fr": "Avez-vous mal à la tête en ce moment ?",
+      "sq": "A keni dhimbje koke tani?",
+      "ar": "هل لديك صداع الآن؟",
+      "ru": "У вас сейчас болит голова?"
+    },
+    "audio": {},
+    "keywords": ["headache", "head", "pain", "now"]
+  },
+  {
+    "id": "P59",
+    "category": "Brain",
+    "translations": {
+      "sv": "Jag känner mig mycket trött och förvirrad",
+      "en": "I feel very tired and confused",
+      "fr": "Je me sens très fatigué et confus",
+      "sq": "Ndihem shumë i lodhur dhe i hutuar",
+      "ar": "أشعر بتعب شديد وارتباك",
+      "ru": "Я чувствую сильную усталость и растерянность"
+    },
+    "audio": {},
+    "keywords": ["confused", "tired", "brain", "förvirrad"]
+  },
+  {
+    "id": "P60",
+    "category": "Brain",
+    "translations": {
+      "sv": "Vet du vilken dag det är idag?",
+      "en": "Do you know what day it is today?",
+      "fr": "Savez-vous quel jour nous sommes aujourd'hui ?",
+      "sq": "A e dini çfarë dite është sot?",
+      "ar": "هل تعرف ما هو اليوم؟",
+      "ru": "Вы знаете, какой сегодня день?"
+    },
+    "audio": {},
+    "keywords": ["day", "memory", "orientation", "brain"]
+  },
+  {
+    "id": "P61",
+    "category": "Brain",
+    "translations": {
+      "sv": "Kan du säga ditt namn?",
+      "en": "Can you say your name?",
+      "fr": "Pouvez-vous dire votre nom ?",
+      "sq": "A mund të thoni emrin tuaj?",
+      "ar": "هل يمكنك أن تقول اسمك؟",
+      "ru": "Можете назвать свое имя?"
+    },
+    "audio": {},
+    "keywords": ["name", "orientation", "brain", "identity"]
+  },
+  {
+    "id": "P62",
+    "category": "Eye",
+    "translations": {
+      "sv": "Jag ser dubbelt",
+      "en": "I see double",
+      "fr": "Je vois double",
+      "sq": "Shoh dyfish",
+      "ar": "أرى بشكل مزدوج",
+      "ru": "У меня двоится в глазах"
+    },
+    "audio": {},
+    "keywords": ["vision", "double", "eye", "see"]
+  },
+  {
+    "id": "P63",
+    "category": "Eye",
+    "translations": {
+      "sv": "Har du svårt att se på ena ögat?",
+      "en": "Do you have trouble seeing with one eye?",
+      "fr": "Avez-vous du mal à voir avec un œil ?",
+      "sq": "A keni vështirësi të shihni me njërin sy?",
+      "ar": "هل لديك صعوبة في الرؤية بإحدى العينين؟",
+      "ru": "Вам трудно видеть одним глазом?"
+    },
+    "audio": {},
+    "keywords": ["eye", "vision", "one eye", "see"]
+  },
+  {
+    "id": "P64",
+    "category": "Eye",
+    "translations": {
+      "sv": "Mitt öga är rött och irriterat",
+      "en": "My eye is red and irritated",
+      "fr": "Mon œil est rouge et irrité",
+      "sq": "Syri im është i kuq dhe i irrituar",
+      "ar": "عيني حمراء ومتهيجة",
+      "ru": "Мой глаз красный и раздражён"
+    },
+    "audio": {},
+    "keywords": ["red eye", "irritated", "eye", "pain"]
+  },
+  {
+    "id": "P65",
+    "category": "Ears",
+    "translations": {
+      "sv": "Det rinner från örat",
+      "en": "There is fluid coming from my ear",
+      "fr": "Il y a du liquide qui sort de mon oreille",
+      "sq": "Po del lëng nga veshi im",
+      "ar": "يخرج سائل من أذني",
+      "ru": "У меня течет из уха"
+    },
+    "audio": {},
+    "keywords": ["ear", "fluid", "ears", "infection"]
+  },
+  {
+    "id": "P66",
+    "category": "Ears",
+    "translations": {
+      "sv": "Hör du sämre än vanligt?",
+      "en": "Are you hearing worse than usual?",
+      "fr": "Entendez-vous moins bien que d'habitude ?",
+      "sq": "A dëgjoni më keq se zakonisht?",
+      "ar": "هل تسمع أسوأ من المعتاد؟",
+      "ru": "Вы слышите хуже, чем обычно?"
+    },
+    "audio": {},
+    "keywords": ["hear", "hearing", "ear", "ears"]
+  },
+  {
+    "id": "P67",
+    "category": "Chest",
+    "translations": {
+      "sv": "Jag känner ett tryck över bröstet",
+      "en": "I feel pressure over my chest",
+      "fr": "Je ressens une pression sur la poitrine",
+      "sq": "Ndjej presion mbi gjoks",
+      "ar": "أشعر بضغط على صدري",
+      "ru": "Я чувствую давление в груди"
+    },
+    "audio": {},
+    "keywords": ["chest", "pressure", "pain", "bröst"]
+  },
+  {
+    "id": "P68",
+    "category": "Chest",
+    "translations": {
+      "sv": "Jag har svårt att ta djupa andetag",
+      "en": "I have difficulty taking deep breaths",
+      "fr": "J'ai du mal à prendre de profondes inspirations",
+      "sq": "E kam të vështirë të marr frymë thellë",
+      "ar": "أجد صعوبة في أخذ أنفاس عميقة",
+      "ru": "Мне трудно делать глубокие вдохи"
+    },
+    "audio": {},
+    "keywords": ["breathing", "deep breath", "chest", "shortness of breath"]
+  },
+  {
+    "id": "P69",
+    "category": "Chest",
+    "translations": {
+      "sv": "När började smärtan i bröstet?",
+      "en": "When did the chest pain start?",
+      "fr": "Quand la douleur thoracique a-t-elle commencé ?",
+      "sq": "Kur filloi dhimbja në gjoks?",
+      "ar": "متى بدأ ألم الصدر؟",
+      "ru": "Когда началась боль в груди?"
+    },
+    "audio": {},
+    "keywords": ["chest pain", "when", "start", "pain"]
+  },
+  {
+    "id": "P70",
+    "category": "Heart",
+    "translations": {
+      "sv": "Känns hjärtat som att det slår oregelbundet?",
+      "en": "Does your heart feel like it is beating irregularly?",
+      "fr": "Avez-vous l'impression que votre cœur bat irrégulièrement ?",
+      "sq": "A ju duket se zemra rreh në mënyrë të parregullt?",
+      "ar": "هل تشعر أن قلبك ينبض بشكل غير منتظم؟",
+      "ru": "Кажется ли вам, что сердце бьется нерегулярно?"
+    },
+    "audio": {},
+    "keywords": ["heart", "irregular", "palpitation", "heartbeat"]
+  },
+  {
+    "id": "P71",
+    "category": "Heart",
+    "translations": {
+      "sv": "Har du haft hjärtklappning idag?",
+      "en": "Have you had palpitations today?",
+      "fr": "Avez-vous eu des palpitations aujourd'hui ?",
+      "sq": "A keni pasur palpitacione sot?",
+      "ar": "هل شعرت بخفقان اليوم؟",
+      "ru": "Было ли у вас сердцебиение сегодня?"
+    },
+    "audio": {},
+    "keywords": ["heart", "palpitations", "today", "heartbeat"]
+  },
+  {
+    "id": "P72",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Jag har ont i nedre delen av magen",
+      "en": "I have pain in the lower part of my stomach",
+      "fr": "J'ai mal dans la partie inférieure du ventre",
+      "sq": "Kam dhimbje në pjesën e poshtme të barkut",
+      "ar": "أشعر بألم في الجزء السفلي من بطني",
+      "ru": "У меня болит внизу живота"
+    },
+    "audio": {},
+    "keywords": ["stomach", "lower abdomen", "pain", "mage"]
+  },
+  {
+    "id": "P73",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Jag har ingen aptit",
+      "en": "I have no appetite",
+      "fr": "Je n'ai pas d'appétit",
+      "sq": "Nuk kam oreks",
+      "ar": "ليس لدي شهية",
+      "ru": "У меня нет аппетита"
+    },
+    "audio": {},
+    "keywords": ["appetite", "stomach", "food", "eat"]
+  },
+  {
+    "id": "P74",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Gör det ont när du äter?",
+      "en": "Does it hurt when you eat?",
+      "fr": "Avez-vous mal quand vous mangez ?",
+      "sq": "A ju dhemb kur hani?",
+      "ar": "هل يؤلمك عندما تأكل؟",
+      "ru": "Больно, когда вы едите?"
+    },
+    "audio": {},
+    "keywords": ["eat", "stomach", "pain", "food"]
+  },
+  {
+    "id": "P75",
+    "category": "Stomach",
+    "translations": {
+      "sv": "Har du ont i magen efter att du har ätit?",
+      "en": "Do you have stomach pain after eating?",
+      "fr": "Avez-vous mal au ventre après avoir mangé ?",
+      "sq": "A keni dhimbje barku pasi keni ngrënë?",
+      "ar": "هل تشعر بألم في المعدة بعد الأكل؟",
+      "ru": "Болит ли у вас живот после еды?"
+    },
+    "audio": {},
+    "keywords": ["after eating", "stomach", "pain", "food"]
+  },
+  {
+    "id": "P76",
+    "category": "Back",
+    "translations": {
+      "sv": "Smärtan går ner i benet",
+      "en": "The pain goes down into my leg",
+      "fr": "La douleur descend dans ma jambe",
+      "sq": "Dhimbja shkon poshtë në këmbë",
+      "ar": "ينتشر الألم إلى ساقي",
+      "ru": "Боль отдает в ногу"
+    },
+    "audio": {},
+    "keywords": ["back", "leg", "radiating pain", "pain"]
+  },
+  {
+    "id": "P77",
+    "category": "Back",
+    "translations": {
+      "sv": "Har du ont i ländryggen?",
+      "en": "Do you have lower back pain?",
+      "fr": "Avez-vous mal dans le bas du dos ?",
+      "sq": "A keni dhimbje në pjesën e poshtme të shpinës?",
+      "ar": "هل لديك ألم في أسفل الظهر؟",
+      "ru": "У вас болит поясница?"
+    },
+    "audio": {},
+    "keywords": ["lower back", "back pain", "rygg", "pain"]
+  },
+  {
+    "id": "P78",
+    "category": "Arm",
+    "translations": {
+      "sv": "Min arm känns svag",
+      "en": "My arm feels weak",
+      "fr": "Mon bras semble faible",
+      "sq": "Krahu im ndihet i dobët",
+      "ar": "أشعر بضعف في ذراعي",
+      "ru": "Моя рука кажется слабой"
+    },
+    "audio": {},
+    "keywords": ["arm", "weak", "pain", "weakness"]
+  },
+  {
+    "id": "P79",
+    "category": "Arm",
+    "translations": {
+      "sv": "Har du domningar i armen?",
+      "en": "Do you have numbness in your arm?",
+      "fr": "Avez-vous un engourdissement dans le bras ?",
+      "sq": "A keni mpirje në krah?",
+      "ar": "هل لديك خدر في ذراعك؟",
+      "ru": "Есть ли у вас онемение в руке?"
+    },
+    "audio": {},
+    "keywords": ["arm", "numbness", "tingling", "domningar"]
+  },
+  {
+    "id": "P80",
+    "category": "Hand",
+    "translations": {
+      "sv": "Min hand är svullen",
+      "en": "My hand is swollen",
+      "fr": "Ma main est enflée",
+      "sq": "Dora ime është e ënjtur",
+      "ar": "يدي متورمة",
+      "ru": "Моя кисть опухла"
+    },
+    "audio": {},
+    "keywords": ["hand", "swollen", "swelling", "pain"]
+  },
+  {
+    "id": "P81",
+    "category": "Hand",
+    "translations": {
+      "sv": "Kan du röra fingrarna?",
+      "en": "Can you move your fingers?",
+      "fr": "Pouvez-vous bouger vos doigts ?",
+      "sq": "A mund të lëvizni gishtat?",
+      "ar": "هل يمكنك تحريك أصابعك؟",
+      "ru": "Можете пошевелить пальцами?"
+    },
+    "audio": {},
+    "keywords": ["hand", "fingers", "move", "movement"]
+  },
+  {
+    "id": "P82",
+    "category": "Leg",
+    "translations": {
+      "sv": "Mitt ben känns svagt",
+      "en": "My leg feels weak",
+      "fr": "Ma jambe semble faible",
+      "sq": "Këmba ime ndihet e dobët",
+      "ar": "أشعر بضعف في ساقي",
+      "ru": "Моя нога кажется слабой"
+    },
+    "audio": {},
+    "keywords": ["leg", "weak", "walking", "weakness"]
+  },
+  {
+    "id": "P83",
+    "category": "Leg",
+    "translations": {
+      "sv": "Har du ramlat?",
+      "en": "Have you fallen?",
+      "fr": "Êtes-vous tombé ?",
+      "sq": "A keni rënë?",
+      "ar": "هل سقطت؟",
+      "ru": "Вы падали?"
+    },
+    "audio": {},
+    "keywords": ["fall", "injury", "leg", "trauma"]
+  },
+  {
+    "id": "P84",
+    "category": "Leg",
+    "translations": {
+      "sv": "Gör det ont i knät?",
+      "en": "Does your knee hurt?",
+      "fr": "Avez-vous mal au genou ?",
+      "sq": "A ju dhemb gjuri?",
+      "ar": "هل يؤلمك ركبتك؟",
+      "ru": "У вас болит колено?"
+    },
+    "audio": {},
+    "keywords": ["knee", "leg", "pain", "walking"]
+  },
+  {
+    "id": "P85",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag har feber",
+      "en": "I have a fever",
+      "fr": "J'ai de la fièvre",
+      "sq": "Kam temperaturë",
+      "ar": "لدي حمى",
+      "ru": "У меня температура"
+    },
+    "audio": {},
+    "keywords": ["fever", "temperature", "ill", "other"]
+  },
+  {
+    "id": "P86",
+    "category": "Other",
+    "translations": {
+      "sv": "Har du mätt din temperatur?",
+      "en": "Have you measured your temperature?",
+      "fr": "Avez-vous mesuré votre température ?",
+      "sq": "A e keni matur temperaturën?",
+      "ar": "هل قست درجة حرارتك؟",
+      "ru": "Вы измеряли температуру?"
+    },
+    "audio": {},
+    "keywords": ["temperature", "fever", "measure", "other"]
+  },
+  {
+    "id": "P87",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag hostar mycket",
+      "en": "I am coughing a lot",
+      "fr": "Je tousse beaucoup",
+      "sq": "Po kollitem shumë",
+      "ar": "أعاني من سعال شديد",
+      "ru": "Я много кашляю"
+    },
+    "audio": {},
+    "keywords": ["cough", "coughing", "other", "breathing"]
+  },
+  {
+    "id": "P88",
+    "category": "Other",
+    "translations": {
+      "sv": "Har du svårt att sova?",
+      "en": "Do you have trouble sleeping?",
+      "fr": "Avez-vous du mal à dormir ?",
+      "sq": "A keni vështirësi për të fjetur?",
+      "ar": "هل لديك صعوبة في النوم؟",
+      "ru": "Вам трудно спать?"
+    },
+    "audio": {},
+    "keywords": ["sleep", "trouble sleeping", "tired", "other"]
+  },
+  {
+    "id": "P89",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag känner mig väldigt trött",
+      "en": "I feel very tired",
+      "fr": "Je me sens très fatigué",
+      "sq": "Ndihem shumë i lodhur",
+      "ar": "أشعر بتعب شديد",
+      "ru": "Я чувствую сильную усталость"
+    },
+    "audio": {},
+    "keywords": ["tired", "fatigue", "other", "weak"]
+  },
+  {
+    "id": "P90",
+    "category": "Other",
+    "translations": {
+      "sv": "Har du några allergier?",
+      "en": "Do you have any allergies?",
+      "fr": "Avez-vous des allergies ?",
+      "sq": "A keni alergji?",
+      "ar": "هل لديك أي حساسية؟",
+      "ru": "У вас есть аллергии?"
+    },
+    "audio": {},
+    "keywords": ["allergy", "allergies", "medicine", "other"]
+  },
+  {
+    "id": "P91",
+    "category": "Other",
+    "translations": {
+      "sv": "Tar du någon medicin?",
+      "en": "Are you taking any medicine?",
+      "fr": "Prenez-vous des médicaments ?",
+      "sq": "A merrni ndonjë ilaç?",
+      "ar": "هل تتناول أي دواء؟",
+      "ru": "Вы принимаете какие-нибудь лекарства?"
+    },
+    "audio": {},
+    "keywords": ["medicine", "medication", "drug", "other"]
+  },
+  {
+    "id": "P92",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag är allergisk mot penicillin",
+      "en": "I am allergic to penicillin",
+      "fr": "Je suis allergique à la pénicilline",
+      "sq": "Jam alergjik ndaj penicilinës",
+      "ar": "لدي حساسية من البنسلين",
+      "ru": "У меня аллергия на пенициллин"
+    },
+    "audio": {},
+    "keywords": ["allergy", "penicillin", "medicine", "other"]
+  },
+  {
+    "id": "P93",
+    "category": "Other",
+    "translations": {
+      "sv": "Har du diabetes?",
+      "en": "Do you have diabetes?",
+      "fr": "Avez-vous du diabète ?",
+      "sq": "A keni diabet?",
+      "ar": "هل لديك سكري؟",
+      "ru": "У вас диабет?"
+    },
+    "audio": {},
+    "keywords": ["diabetes", "blood sugar", "other", "disease"]
+  },
+  {
+    "id": "P94",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag behöver vatten",
+      "en": "I need water",
+      "fr": "J'ai besoin d'eau",
+      "sq": "Kam nevojë për ujë",
+      "ar": "أحتاج إلى ماء",
+      "ru": "Мне нужна вода"
+    },
+    "audio": {},
+    "keywords": ["water", "drink", "need", "other"]
+  },
+  {
+    "id": "P95",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag behöver gå på toaletten",
+      "en": "I need to go to the toilet",
+      "fr": "J'ai besoin d'aller aux toilettes",
+      "sq": "Kam nevojë të shkoj në tualet",
+      "ar": "أحتاج إلى الذهاب إلى الحمام",
+      "ru": "Мне нужно в туалет"
+    },
+    "audio": {},
+    "keywords": ["toilet", "bathroom", "need", "other"]
+  },
+  {
+    "id": "P96",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag fryser",
+      "en": "I am cold",
+      "fr": "J'ai froid",
+      "sq": "Kam ftohtë",
+      "ar": "أشعر بالبرد",
+      "ru": "Мне холодно"
+    },
+    "audio": {},
+    "keywords": ["cold", "freeze", "temperature", "other"]
+  },
+  {
+    "id": "P97",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag är varm",
+      "en": "I am hot",
+      "fr": "J'ai chaud",
+      "sq": "Kam vapë",
+      "ar": "أشعر بالحر",
+      "ru": "Мне жарко"
+    },
+    "audio": {},
+    "keywords": ["hot", "warm", "temperature", "other"]
+  },
+  {
+    "id": "P98",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag har ont när jag kissar",
+      "en": "It hurts when I urinate",
+      "fr": "J'ai mal quand j'urine",
+      "sq": "Më dhemb kur urinoj",
+      "ar": "أشعر بألم عند التبول",
+      "ru": "Мне больно мочиться"
+    },
+    "audio": {},
+    "keywords": ["urine", "urinate", "pain", "other"]
+  },
+  {
+    "id": "P99",
+    "category": "Other",
+    "translations": {
+      "sv": "Har du blod i urinen?",
+      "en": "Do you have blood in your urine?",
+      "fr": "Y a-t-il du sang dans vos urines ?",
+      "sq": "A keni gjak në urinë?",
+      "ar": "هل يوجد دم في البول؟",
+      "ru": "Есть ли кровь в моче?"
+    },
+    "audio": {},
+    "keywords": ["blood", "urine", "urinary", "other"]
+  },
+  {
+    "id": "P100",
+    "category": "Other",
+    "translations": {
+      "sv": "Jag behöver vila",
+      "en": "I need to rest",
+      "fr": "J'ai besoin de me reposer",
+      "sq": "Kam nevojë të pushoj",
+      "ar": "أحتاج إلى الراحة",
+      "ru": "Мне нужно отдохнуть"
+    },
+    "audio": {},
+    "keywords": ["rest", "tired", "need", "other"]
   }
 ]
