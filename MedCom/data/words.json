@@ -13,12 +13,562 @@
   {
     "id": "W2",
     "translations": {
-      "sv": "Hjärtklappnig",
-      "en": "Palpitation",
-      "fr": "Palpitation",
-      "sq": "Palpitacion",
+      "sv": "hjärtklappning",
+      "en": "palpitation",
+      "fr": "palpitation",
+      "sq": "palpitacion",
       "ar": "خفقان",
-      "ru": "Сердцебиение"
+      "ru": "сердцебиение"
+    }
+  },
+  {
+    "id": "W3",
+    "translations": {
+      "sv": "huvud",
+      "en": "head",
+      "fr": "tête",
+      "sq": "kokë",
+      "ar": "رأس",
+      "ru": "голова"
+    }
+  },
+  {
+    "id": "W4",
+    "translations": {
+      "sv": "hjärna",
+      "en": "brain",
+      "fr": "cerveau",
+      "sq": "tru",
+      "ar": "دماغ",
+      "ru": "мозг"
+    }
+  },
+  {
+    "id": "W5",
+    "translations": {
+      "sv": "öga",
+      "en": "eye",
+      "fr": "œil",
+      "sq": "sy",
+      "ar": "عين",
+      "ru": "глаз"
+    }
+  },
+  {
+    "id": "W6",
+    "translations": {
+      "sv": "öra",
+      "en": "ear",
+      "fr": "oreille",
+      "sq": "vesh",
+      "ar": "أذن",
+      "ru": "ухо"
+    }
+  },
+  {
+    "id": "W7",
+    "translations": {
+      "sv": "bröst",
+      "en": "chest",
+      "fr": "poitrine",
+      "sq": "gjoks",
+      "ar": "صدر",
+      "ru": "грудь"
+    }
+  },
+  {
+    "id": "W8",
+    "translations": {
+      "sv": "hjärta",
+      "en": "heart",
+      "fr": "cœur",
+      "sq": "zemër",
+      "ar": "قلب",
+      "ru": "сердце"
+    }
+  },
+  {
+    "id": "W9",
+    "translations": {
+      "sv": "mage",
+      "en": "stomach",
+      "fr": "ventre",
+      "sq": "bark",
+      "ar": "بطن",
+      "ru": "живот"
+    }
+  },
+  {
+    "id": "W10",
+    "translations": {
+      "sv": "rygg",
+      "en": "back",
+      "fr": "dos",
+      "sq": "shpinë",
+      "ar": "ظهر",
+      "ru": "спина"
+    }
+  },
+  {
+    "id": "W11",
+    "translations": {
+      "sv": "arm",
+      "en": "arm",
+      "fr": "bras",
+      "sq": "krah",
+      "ar": "ذراع",
+      "ru": "рука"
+    }
+  },
+  {
+    "id": "W12",
+    "translations": {
+      "sv": "hand",
+      "en": "hand",
+      "fr": "main",
+      "sq": "dorë",
+      "ar": "يد",
+      "ru": "кисть"
+    }
+  },
+  {
+    "id": "W13",
+    "translations": {
+      "sv": "ben",
+      "en": "leg",
+      "fr": "jambe",
+      "sq": "këmbë",
+      "ar": "ساق",
+      "ru": "нога"
+    }
+  },
+  {
+    "id": "W14",
+    "translations": {
+      "sv": "fot",
+      "en": "foot",
+      "fr": "pied",
+      "sq": "këmbë",
+      "ar": "قدم",
+      "ru": "ступня"
+    }
+  },
+  {
+    "id": "W15",
+    "translations": {
+      "sv": "hals",
+      "en": "throat",
+      "fr": "gorge",
+      "sq": "fyt",
+      "ar": "حلق",
+      "ru": "горло"
+    }
+  },
+  {
+    "id": "W16",
+    "translations": {
+      "sv": "hosta",
+      "en": "cough",
+      "fr": "toux",
+      "sq": "kollë",
+      "ar": "سعال",
+      "ru": "кашель"
+    }
+  },
+  {
+    "id": "W17",
+    "translations": {
+      "sv": "feber",
+      "en": "fever",
+      "fr": "fièvre",
+      "sq": "ethe",
+      "ar": "حمى",
+      "ru": "жар"
+    }
+  },
+  {
+    "id": "W18",
+    "translations": {
+      "sv": "illamående",
+      "en": "nausea",
+      "fr": "nausée",
+      "sq": "nauze",
+      "ar": "غثيان",
+      "ru": "тошнота"
+    }
+  },
+  {
+    "id": "W19",
+    "translations": {
+      "sv": "kräkning",
+      "en": "vomiting",
+      "fr": "vomissement",
+      "sq": "të vjella",
+      "ar": "قيء",
+      "ru": "рвота"
+    }
+  },
+  {
+    "id": "W20",
+    "translations": {
+      "sv": "yrsel",
+      "en": "dizziness",
+      "fr": "vertiges",
+      "sq": "marramendje",
+      "ar": "دوخة",
+      "ru": "головокружение"
+    }
+  },
+  {
+    "id": "W21",
+    "translations": {
+      "sv": "trötthet",
+      "en": "fatigue",
+      "fr": "fatigue",
+      "sq": "lodhje",
+      "ar": "إرهاق",
+      "ru": "усталость"
+    }
+  },
+  {
+    "id": "W22",
+    "translations": {
+      "sv": "svullnad",
+      "en": "swelling",
+      "fr": "gonflement",
+      "sq": "ënjtje",
+      "ar": "تورم",
+      "ru": "отёк"
+    }
+  },
+  {
+    "id": "W23",
+    "translations": {
+      "sv": "utslag",
+      "en": "rash",
+      "fr": "éruption",
+      "sq": "skuqje",
+      "ar": "طفح جلدي",
+      "ru": "сыпь"
+    }
+  },
+  {
+    "id": "W24",
+    "translations": {
+      "sv": "allergi",
+      "en": "allergy",
+      "fr": "allergie",
+      "sq": "alergji",
+      "ar": "حساسية",
+      "ru": "аллергия"
+    }
+  },
+  {
+    "id": "W25",
+    "translations": {
+      "sv": "medicin",
+      "en": "medicine",
+      "fr": "médicament",
+      "sq": "ilaç",
+      "ar": "دواء",
+      "ru": "лекарство"
+    }
+  },
+  {
+    "id": "W26",
+    "translations": {
+      "sv": "tablett",
+      "en": "tablet",
+      "fr": "comprimé",
+      "sq": "tabletë",
+      "ar": "قرص",
+      "ru": "таблетка"
+    }
+  },
+  {
+    "id": "W27",
+    "translations": {
+      "sv": "spruta",
+      "en": "injection",
+      "fr": "injection",
+      "sq": "injeksion",
+      "ar": "حقنة",
+      "ru": "укол"
+    }
+  },
+  {
+    "id": "W28",
+    "translations": {
+      "sv": "blod",
+      "en": "blood",
+      "fr": "sang",
+      "sq": "gjak",
+      "ar": "دم",
+      "ru": "кровь"
+    }
+  },
+  {
+    "id": "W29",
+    "translations": {
+      "sv": "andning",
+      "en": "breathing",
+      "fr": "respiration",
+      "sq": "frymëmarrje",
+      "ar": "تنفس",
+      "ru": "дыхание"
+    }
+  },
+  {
+    "id": "W30",
+    "translations": {
+      "sv": "andfåddhet",
+      "en": "shortness of breath",
+      "fr": "essoufflement",
+      "sq": "gulçim",
+      "ar": "ضيق في التنفس",
+      "ru": "одышка"
+    }
+  },
+  {
+    "id": "W31",
+    "translations": {
+      "sv": "sår",
+      "en": "wound",
+      "fr": "plaie",
+      "sq": "plagë",
+      "ar": "جرح",
+      "ru": "рана"
+    }
+  },
+  {
+    "id": "W32",
+    "translations": {
+      "sv": "skada",
+      "en": "injury",
+      "fr": "blessure",
+      "sq": "lëndim",
+      "ar": "إصابة",
+      "ru": "травма"
+    }
+  },
+  {
+    "id": "W33",
+    "translations": {
+      "sv": "fraktur",
+      "en": "fracture",
+      "fr": "fracture",
+      "sq": "frakturë",
+      "ar": "كسر",
+      "ru": "перелом"
+    }
+  },
+  {
+    "id": "W34",
+    "translations": {
+      "sv": "tryck",
+      "en": "pressure",
+      "fr": "pression",
+      "sq": "presion",
+      "ar": "ضغط",
+      "ru": "давление"
+    }
+  },
+  {
+    "id": "W35",
+    "translations": {
+      "sv": "blodtryck",
+      "en": "blood pressure",
+      "fr": "pression artérielle",
+      "sq": "presioni i gjakut",
+      "ar": "ضغط الدم",
+      "ru": "кровяное давление"
+    }
+  },
+  {
+    "id": "W36",
+    "translations": {
+      "sv": "diabetes",
+      "en": "diabetes",
+      "fr": "diabète",
+      "sq": "diabet",
+      "ar": "سكري",
+      "ru": "диабет"
+    }
+  },
+  {
+    "id": "W37",
+    "translations": {
+      "sv": "infektion",
+      "en": "infection",
+      "fr": "infection",
+      "sq": "infeksion",
+      "ar": "عدوى",
+      "ru": "инфекция"
+    }
+  },
+  {
+    "id": "W38",
+    "translations": {
+      "sv": "urin",
+      "en": "urine",
+      "fr": "urine",
+      "sq": "urinë",
+      "ar": "بول",
+      "ru": "моча"
+    }
+  },
+  {
+    "id": "W39",
+    "translations": {
+      "sv": "avföring",
+      "en": "stool",
+      "fr": "selles",
+      "sq": "jashtëqitje",
+      "ar": "براز",
+      "ru": "стул"
+    }
+  },
+  {
+    "id": "W40",
+    "translations": {
+      "sv": "aptit",
+      "en": "appetite",
+      "fr": "appétit",
+      "sq": "oreks",
+      "ar": "شهية",
+      "ru": "аппетит"
+    }
+  },
+  {
+    "id": "W41",
+    "translations": {
+      "sv": "sömn",
+      "en": "sleep",
+      "fr": "sommeil",
+      "sq": "gjumë",
+      "ar": "نوم",
+      "ru": "сон"
+    }
+  },
+  {
+    "id": "W42",
+    "translations": {
+      "sv": "operation",
+      "en": "operation",
+      "fr": "opération",
+      "sq": "operacion",
+      "ar": "عملية",
+      "ru": "операция"
+    }
+  },
+  {
+    "id": "W43",
+    "translations": {
+      "sv": "sjukhus",
+      "en": "hospital",
+      "fr": "hôpital",
+      "sq": "spital",
+      "ar": "مستشفى",
+      "ru": "больница"
+    }
+  },
+  {
+    "id": "W44",
+    "translations": {
+      "sv": "läkare",
+      "en": "doctor",
+      "fr": "médecin",
+      "sq": "mjek",
+      "ar": "طبيب",
+      "ru": "врач"
+    }
+  },
+  {
+    "id": "W45",
+    "translations": {
+      "sv": "sjuksköterska",
+      "en": "nurse",
+      "fr": "infirmier",
+      "sq": "infermier",
+      "ar": "ممرض",
+      "ru": "медсестра"
+    }
+  },
+  {
+    "id": "W46",
+    "translations": {
+      "sv": "patient",
+      "en": "patient",
+      "fr": "patient",
+      "sq": "pacient",
+      "ar": "مريض",
+      "ru": "пациент"
+    }
+  },
+  {
+    "id": "W47",
+    "translations": {
+      "sv": "temperatur",
+      "en": "temperature",
+      "fr": "température",
+      "sq": "temperaturë",
+      "ar": "درجة الحرارة",
+      "ru": "температура"
+    }
+  },
+  {
+    "id": "W48",
+    "translations": {
+      "sv": "huvudvärk",
+      "en": "headache",
+      "fr": "mal de tête",
+      "sq": "dhimbje koke",
+      "ar": "صداع",
+      "ru": "головная боль"
+    }
+  },
+  {
+    "id": "W49",
+    "translations": {
+      "sv": "magont",
+      "en": "stomach ache",
+      "fr": "mal de ventre",
+      "sq": "dhimbje barku",
+      "ar": "ألم في البطن",
+      "ru": "боль в животе"
+    }
+  },
+  {
+    "id": "W50",
+    "translations": {
+      "sv": "bröstsmärta",
+      "en": "chest pain",
+      "fr": "douleur thoracique",
+      "sq": "dhimbje gjoksi",
+      "ar": "ألم في الصدر",
+      "ru": "боль в груди"
+    }
+  },
+  {
+    "id": "W51",
+    "translations": {
+      "sv": "allvarlig",
+      "en": "serious",
+      "fr": "grave",
+      "sq": "serioz",
+      "ar": "خطير",
+      "ru": "серьёзный"
+    }
+  },
+  {
+    "id": "W52",
+    "translations": {
+      "sv": "snabbt",
+      "en": "quickly",
+      "fr": "rapidement",
+      "sq": "shpejt",
+      "ar": "بسرعة",
+      "ru": "быстро"
     }
   }
 ]
