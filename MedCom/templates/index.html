@@ -12,70 +12,95 @@
 </head>
 
 <body>
-  <!-- Header and navigation -->
+  <!-- Main header and top navigation -->
   <header class="header">
-    <h1>MedCom</h1>
-    <p class="subtitle">A medical communication app</p>
-    <nav class="topnav">
-      <a href="{{ url_for('index') }}">Home</a>
-      <a href="{{ url_for('admin_login') }}">Admin</a>
-    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <h1>MedCom</h1>
+        <p class="subtitle">A medical communication app</p>
+      </div>
+
+      <nav class="topnav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('info') }}">Info</a>
+        <a href="{{ url_for('admin_login') }}">Admin</a>
+      </nav>
+    </div>
   </header>
 
   <main class="container">
-    <section class="card about-card">
-      <h2>About MedCom</h2>
-      <p>
-        MedCom is a multilingual medical communication web application designed to support
-        communication between patients and healthcare staff through predefined translated phrases.
-      </p>
-      <p>
-        The app supports two-way communication, phrase categories, smart search, word lookup,
-        optional audio playback, and local-first operation.
-      </p>
-    </section>
-
-    <!-- Language selection -->
-    <section class="card">
-      <h2>Languages</h2>
-      <div class="grid-2">
-        <div>
-          <label>Patient language</label>
-          <select id="patientLang"></select>
+    <!-- Top control area:
+         language selection and smart search are placed first
+         because they are common entry points into the app -->
+    <section class="top-dashboard">
+      <!-- Language selection -->
+      <section class="card compact-card">
+        <h2>Languages</h2>
+        <div class="grid-2">
+          <div>
+            <label>Patient language</label>
+            <select id="patientLang"></select>
+          </div>
+          <div>
+            <label>Staff language</label>
+            <select id="staffLang"></select>
+          </div>
         </div>
-        <div>
-          <label>Staff language</label>
-          <select id="staffLang"></select>
+      </section>
+
+      <!-- Smart search with optional voice input -->
+      <section class="card compact-card">
+        <h2>Smart Search</h2>
+        <input
+          id="smartSearch"
+          class="input"
+          placeholder="Type or say: pain, stomach, headache..."
+        />
+
+        <div class="voice-controls">
+          <button id="startVoiceSearch" class="btn" type="button">Start voice search</button>
+          <button id="stopVoiceSearch" class="btn btn-secondary" type="button">Stop</button>
         </div>
-      </div>
+
+        <div id="voiceStatus" class="voice-status"></div>
+        <div id="suggestions" class="chips"></div>
+      </section>
     </section>
 
-    <section class="card">
-      <h2>Smart Search (keyword suggestions)</h2>
-      <input id="smartSearch" class="input" placeholder="Type e.g. pain, stomach, headache..." />
-      <div id="suggestions" class="chips"></div>
+    <!-- Middle support area:
+         word lookup and recent phrases are shown side by side
+         to reduce vertical scrolling -->
+    <section class="support-grid">
+      <section class="card compact-card">
+        <h2>Word Lookup</h2>
+        <input id="wordSearch" class="input" placeholder="Search a word..." />
+        <div id="wordResults" class="word-results"></div>
+      </section>
+
+      <section class="card compact-card">
+        <h2>Recent Phrases</h2>
+        <div id="recent" class="chips"></div>
+      </section>
     </section>
 
+    <!-- Phrase library:
+         this remains one of the main interaction areas -->
     <section class="card">
-      <h2>Word list</h2>
-      <input id="wordSearch" class="input" placeholder="Search a word..." />
-      <div id="wordResults" class="word-results"></div>
-    </section>
-
-    <!-- Phrase categories -->
-    <section class="card">
-      <h2>Phrases by category</h2>
+      <h2>Phrases by Category</h2>
       <div id="categories"></div>
     </section>
 
-    <!-- Translation display and audio playback -->
+    <!-- Translation output:
+         shows the currently selected phrase in both languages -->
     <section class="card">
       <h2>Translations</h2>
+
       <div class="grid-2">
         <div>
           <div class="label">Patient output</div>
           <div id="patientText" class="output"></div>
         </div>
+
         <div>
           <div class="label">Staff output</div>
           <div id="staffText" class="output"></div>
@@ -90,13 +115,7 @@
     </section>
   </main>
 
-  <!-- Recent phrases shown separately for visual emphasis -->
-  <section class="card recent-standalone">
-    <h2>Recent phrases</h2>
-    <div id="recent" class="chips"></div>
-  </section>
-
-  <!-- Data passed from Flask to JavaScript -->
+  <!-- Pass backend data to JavaScript -->
   <script>
     window.MEDCOM_DATA = {
       languages: {{ languages | tojson }},
@@ -104,6 +123,8 @@
       words: {{ words | tojson }}
     };
   </script>
+
+  <!-- Main frontend logic -->
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
