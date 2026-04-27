@@ -3,19 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MedCom Admin Login</title>
+  <title>MedCom - Admin Login</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
+  <!-- Login page header and navigation -->
   <header class="header">
     <h1>MedCom</h1>
     <p class="subtitle">Admin login</p>
+
     <nav class="topnav">
       <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('info') }}">Info</a>
     </nav>
   </header>
 
   <main class="container">
+    <!-- Flash messages:
+         shows login errors or other status feedback -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <section class="card">
@@ -26,8 +32,12 @@
       {% endif %}
     {% endwith %}
 
+    <!-- Admin login form:
+         requires a valid username and password
+         before the admin page can be accessed -->
     <section class="card">
       <h2>Admin Access</h2>
+
       <form method="post">
         <label>Username</label>
         <input class="input" type="text" name="username" required>
