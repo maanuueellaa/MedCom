@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap for the public MedCom pages -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main homepage -->
   <url>
-    <loc>https://med.com/</loc>
+    <loc>https://medcom-33wi.onrender.com/</loc>
+  </url>
+
+  <!-- Public information page -->
+  <url>
+    <loc>https://medcom-33wi.onrender.com/info</loc>
   </url>
 </urlset>
