@@ -1,6 +1,7 @@
 // Frontend logic for MedCom:
 // handles language selection, phrase rendering, translation display,
-// recent phrase history, smart search, word lookup, and optional audio playback.
+// recent phrase history, smart search, word lookup, optional audio playback,
+// and voice input for smart search.
 
 (function () {
   const data = window.MEDCOM_DATA;
@@ -25,7 +26,18 @@
   const recentEl = document.getElementById("recent");
   const RECENT_KEY = "medcom_recent";
 
-  const state = { patientLang: null, staffLang: null, selected: null };
+  // Voice search UI elements
+  const startVoiceSearchBtn = document.getElementById("startVoiceSearch");
+  const stopVoiceSearchBtn = document.getElementById("stopVoiceSearch");
+  const voiceStatusEl = document.getElementById("voiceStatus");
+
+  const state = {
+    patientLang: null,
+    staffLang: null,
+    selected: null,
+    recognition: null,
+    isListening: false,
+  };
 
   const langName = (c) => languages?.[c]?.name || c;
   const tFor = (obj, code) => obj?.translations?.[code] || "";
@@ -55,6 +67,15 @@
 
   const categoryName = (cat, code) => categoryLabels?.[cat]?.[code] || cat;
 
+  function setVoiceStatus(message) {
+    if (!voiceStatusEl) return;
+    voiceStatusEl.textContent = message;
+  }
+
+  function speechLocaleForSearch() {
+    return languages?.[state.patientLang]?.tts || state.patientLang || "en-US";
+  }
+
   // Populate the patient/staff language dropdowns
   // and connect them to the application state.
   function fillLanguages() {
@@ -81,6 +102,7 @@
 
     patientLangSel.addEventListener("change", () => {
       state.patientLang = patientLangSel.value;
+      updateRecognitionLanguage();
       renderAll();
     });
 
@@ -120,6 +142,7 @@
 
     const patientBox = document.createElement("div");
     patientBox.className = "phrase-side-box";
+
     const patientTitle = document.createElement("div");
     patientTitle.className = "side-main-heading";
     patientTitle.textContent = `Patient (${langName(state.patientLang)})`;
@@ -153,6 +176,7 @@
 
     const staffBox = document.createElement("div");
     staffBox.className = "phrase-side-box";
+
     const staffTitle = document.createElement("div");
     staffTitle.className = "side-main-heading";
     staffTitle.textContent = `Staff (${langName(state.staffLang)})`;
@@ -205,6 +229,7 @@
 
     const text = tFor(p, state.patientLang);
     if (!text) return;
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = languages?.[state.patientLang]?.tts || state.patientLang;
     speechSynthesis.cancel();
@@ -235,6 +260,7 @@
   function renderRecent() {
     recentEl.innerHTML = "";
     const ids = loadRecent();
+
     if (!ids.length) {
       recentEl.textContent = "No recent phrases.";
       return;
@@ -243,6 +269,7 @@
     ids.forEach((id) => {
       const p = phrases.find((x) => x.id === id);
       if (!p) return;
+
       const chip = document.createElement("div");
       chip.className = "chip";
       chip.textContent = tFor(p, state.patientLang) || id;
@@ -256,7 +283,9 @@
     if (!query) return false;
 
     const keywords = Array.isArray(p.keywords) ? p.keywords : [];
-    if (keywords.some((k) => String(k).toLowerCase().includes(query))) return true;
+    if (keywords.some((k) => String(k).toLowerCase().includes(query))) {
+      return true;
+    }
 
     return Object.values(p.translations || {}).some((v) =>
       String(v).toLowerCase().includes(query)
@@ -266,6 +295,7 @@
   // Render keyword-based phrase suggestions from short free-text input.
   function renderSuggestions() {
     if (!smartSearch || !suggestionsEl) return;
+
     suggestionsEl.innerHTML = "";
     const q = smartSearch.value.trim();
     if (!q) return;
@@ -285,6 +315,7 @@
   // Render the searchable multilingual word list.
   function renderWords() {
     if (!wordSearch || !wordResults) return;
+
     wordResults.innerHTML = "";
     const q = (wordSearch.value || "").trim().toLowerCase();
 
@@ -312,9 +343,87 @@
     });
   }
 
+  // Initialize browser speech recognition for voice input in smart search.
+  function initVoiceSearch() {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      setVoiceStatus("Voice search is not supported in this browser.");
+      if (startVoiceSearchBtn) startVoiceSearchBtn.disabled = true;
+      if (stopVoiceSearchBtn) stopVoiceSearchBtn.disabled = true;
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = speechLocaleForSearch();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      state.isListening = true;
+      setVoiceStatus("Listening...");
+      if (startVoiceSearchBtn) startVoiceSearchBtn.disabled = true;
+      if (stopVoiceSearchBtn) stopVoiceSearchBtn.disabled = false;
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event?.results?.[0]?.[0]?.transcript?.trim() || "";
+      if (!transcript || !smartSearch) return;
+
+      smartSearch.value = transcript;
+      renderSuggestions();
+      setVoiceStatus(`Heard: ${transcript}`);
+    };
+
+    recognition.onerror = (event) => {
+      const message = event?.error ? `Voice search error: ${event.error}` : "Voice search failed.";
+      setVoiceStatus(message);
+    };
+
+    recognition.onend = () => {
+      state.isListening = false;
+      if (startVoiceSearchBtn) startVoiceSearchBtn.disabled = false;
+      if (stopVoiceSearchBtn) stopVoiceSearchBtn.disabled = true;
+
+      if (!voiceStatusEl?.textContent?.startsWith("Heard:")) {
+        setVoiceStatus("Voice search stopped.");
+      }
+    };
+
+    state.recognition = recognition;
+
+    if (startVoiceSearchBtn) {
+      startVoiceSearchBtn.addEventListener("click", () => {
+        if (!state.recognition || state.isListening) return;
+        state.recognition.lang = speechLocaleForSearch();
+        setVoiceStatus("Starting voice search...");
+        state.recognition.start();
+      });
+    }
+
+    if (stopVoiceSearchBtn) {
+      stopVoiceSearchBtn.addEventListener("click", () => {
+        if (!state.recognition || !state.isListening) return;
+        state.recognition.stop();
+      });
+      stopVoiceSearchBtn.disabled = true;
+    }
+
+    setVoiceStatus("Voice search is ready.");
+  }
+
+  function updateRecognitionLanguage() {
+    if (!state.recognition) return;
+    state.recognition.lang = speechLocaleForSearch();
+  }
+
   // Re-render the main UI based on current state and language selection.
   function renderAll() {
-    document.documentElement.dir = languages?.[state.patientLang]?.direction || "ltr";
+    document.documentElement.dir =
+      languages?.[state.patientLang]?.direction || "ltr";
+
     renderCategories();
     renderRecent();
     renderSuggestions();
@@ -325,6 +434,7 @@
   }
 
   fillLanguages();
+  initVoiceSearch();
   renderAll();
 
   playBtn?.addEventListener("click", playAudio);
