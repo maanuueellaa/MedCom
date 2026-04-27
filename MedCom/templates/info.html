@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MedCom - Info</title>
+  <meta name="description" content="Information about MedCom, a multilingual medical communication web application for patients and healthcare staff.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+  <!-- Info page header and main navigation -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand-block">
+        <h1>MedCom</h1>
+        <p class="subtitle">Information about the system</p>
+      </div>
+
+      <nav class="topnav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('info') }}">Info</a>
+        <a href="{{ url_for('admin_login') }}">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Introduction to MedCom and its purpose -->
+    <section class="card">
+      <h2>About MedCom</h2>
+      <p>
+        MedCom is a multilingual medical communication web application designed to reduce
+        language barriers between patients and healthcare staff. The system supports structured,
+        phrase-based communication in situations where the two parties do not share a common language.
+      </p>
+      <p>
+        Instead of relying on unrestricted machine translation, MedCom uses predefined medical
+        phrases and word entries stored in local structured data files. This helps create more
+        predictable, consistent, and understandable communication in healthcare settings.
+      </p>
+    </section>
+
+    <!-- Overview of the main user-facing functions -->
+    <section class="card">
+      <h2>Main Features</h2>
+      <div class="word-results">
+        <div class="word-row">
+          <div><strong>Dual Language Selection</strong></div>
+          <div>Patient and staff can independently choose their preferred languages.</div>
+        </div>
+
+        <div class="word-row">
+          <div><strong>Phrase Categories</strong></div>
+          <div>Medical phrases are organized by category for fast and structured browsing.</div>
+        </div>
+
+        <div class="word-row">
+          <div><strong>Structured Translation Display</strong></div>
+          <div>The selected phrase is shown in both the patient’s and the staff’s chosen languages.</div>
+        </div>
+
+        <div class="word-row">
+          <div><strong>Smart Search</strong></div>
+          <div>Users can type or speak keywords to receive relevant phrase suggestions.</div>
+        </div>
+
+        <div class="word-row">
+          <div><strong>Word Lookup</strong></div>
+          <div>The app includes a searchable multilingual word list for quick vocabulary clarification.</div>
+        </div>
+
+        <div class="word-row">
+          <div><strong>Recent Phrases</strong></div>
+          <div>The five most recently selected phrases are stored for quick reuse.</div>
+        </div>
+
+        <div class="word-row">
+          <div><strong>Audio Playback</strong></div>
+          <div>Some phrases can be played as recorded audio, with browser speech fallback when needed.</div>
+        </div>
+
+        <div class="word-row">
+          <div><strong>Admin Management</strong></div>
+          <div>Authorized administrators can add and delete phrases and words without changing application code.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explanation of how the system is intended to be used -->
+    <section class="card">
+      <h2>How MedCom Works</h2>
+      <p>
+        The user first selects a language for the patient and a language for the healthcare staff.
+        After that, phrases can be browsed by category or found through smart search. When a phrase
+        is selected, the system displays the same phrase meaning in both selected languages.
+      </p>
+      <p>
+        The system also supports word lookup, recent phrase history, and optional audio playback.
+        Administrative functions make it possible to maintain and extend the phrase and word datasets
+        without changing the application logic.
+      </p>
+    </section>
+
+    <!-- Architectural and technical context -->
+    <section class="card">
+      <h2>Technical Overview</h2>
+      <p>
+        MedCom is implemented as a Flask-based web application with a browser-based frontend.
+        The system uses HTML, CSS, and JavaScript in the user interface, while structured JSON
+        files are used to store languages, phrases, keywords, and word entries.
+      </p>
+      <p>
+        The architecture separates presentation, application logic, and data, which supports
+        maintainability and easier content updates. The local-first data approach also supports
+        controlled operation without relying on external translation APIs.
+      </p>
+    </section>
+
+    <!-- Scope limitations and intended use -->
+    <section class="card">
+      <h2>Important Notes</h2>
+      <p>
+        MedCom is intended to support structured multilingual communication in healthcare contexts.
+        It is not designed to replace professional interpreters in complex or sensitive medical situations.
+      </p>
+      <p>
+        The current version is a project-based prototype focused on usability, clarity, and maintainability.
+        It is best suited for controlled environments where a small-scale and predictable communication tool is needed.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
