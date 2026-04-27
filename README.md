@@ -38,8 +38,24 @@ The current version includes:
 
 ---
 
+## How to start the offline version of the application
+
+1. Open the project folder and open a terminal in the folder where app.py and requirements.txt are located.
+2. Create your own virtual environment named venv, for Window: python -m venv .venv, for macOS/Linux: python3 -m venv .venv
+3. Activate the virtual environment for Windows: venv\Scripts\activate, for macOS/Linux: source .venv/bin/activate
+4. Install all the dependencies from requirements.txt: pip install -r requirements.txt
+5. Run the application with; python app.py for Windows, or python3 app.py for macOS/Linux
+
+## Public deployment version
+1. The app can also be accessed through this link: https://medcom-33wi.onrender.com/
+2. But it only works if internet is available. 
+
+
+---
+
 ## Project Structure
 
+```text id="6n4m9x"
 MedCom/
 │
 ├── app.py
@@ -63,15 +79,3 @@ MedCom/
     ├── audio/
     ├── robots.txt
     └── sitemap.xml
-
-## How to start the offline version of the application
-
-1. Open the project folder and open a terminal in the folder where app.py and requirements.txt are located.
-2. Create your own virtual environment named venv, for Window: python -m venv .venv, for macOS/Linux: python3 -m venv .venv
-3. Activate the virtual environment for Windows: venv\Scripts\activate, for macOS/Linux: source .venv/bin/activate
-4. Install all the dependencies from requirements.txt: pip install -r requirements.txt
-5. Run the application with; python app.py for Windows, or python3 app.py for macOS/Linux
-
-## Public deployment version
-1. The app can also be accessed through this link: https://medcom-33wi.onrender.com/
-2. But it only works if internet is available. 
