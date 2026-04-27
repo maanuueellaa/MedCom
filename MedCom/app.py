@@ -18,7 +18,8 @@ from flask import (
 )
 
 # Backend entry point for MedCom.
-# Loads local JSON data, serves the UI, and handles admin actions.
+# Loads local JSON data, serves the user/admin pages,
+# and handles authenticated content management.
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret")
 
@@ -26,27 +27,30 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-# Admin credentials should be overridden in production via environment variables.
+# Admin credentials should be overridden in production
+# through environment variables.
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "ChangeMe123!")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "OurStrongPassword321?")
 
 
+# Read a JSON file from the data directory
+# and return its parsed contents.
 def read_json(filename: str) -> Any:
-    """Read a JSON file from the data directory."""
     path = os.path.join(DATA_DIR, filename)
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
+# Write structured data back to a JSON file
+# using UTF-8 and readable indentation.
 def write_json(filename: str, data: Any) -> None:
-    """Write data to a JSON file in the data directory."""
     path = os.path.join(DATA_DIR, filename)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
+# Load all application data needed by the UI and admin pages.
 def load_data() -> Dict[str, Any]:
-    """Load all data needed by the frontend and admin pages."""
     return {
         "languages": read_json("languages.json"),
         "phrases": read_json("phrases.json"),
@@ -54,25 +58,34 @@ def load_data() -> Dict[str, Any]:
     }
 
 
+# Check whether the current session has unlocked admin access.
 def is_admin_logged_in() -> bool:
-    """Check whether the admin session is unlocked."""
     return bool(session.get("admin_logged_in", False))
 
 
+# Render the main homepage with languages, phrases, and words.
 @app.get("/")
 def index():
-    """Render the homepage with languages, phrases, and words."""
     data = load_data()
     return render_template("index.html", **data)
 
 
+# Render the separate information page.
+# This page can later contain system description,
+# usage instructions, and project background.
+@app.get("/info")
+def info():
+    return render_template("info.html")
+
+
+# Handle admin login through username and password.
 @app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
-    """Authenticate the admin user before allowing content management."""
     if request.method == "POST":
         username = (request.form.get("username") or "").strip()
         password = (request.form.get("password") or "").strip()
 
+        # Compare credentials safely.
         username_ok = hmac.compare_digest(username, ADMIN_USERNAME)
         password_ok = hmac.compare_digest(password, ADMIN_PASSWORD)
 
@@ -86,26 +99,28 @@ def admin_login():
     return render_template("admin_login.html")
 
 
+# End the admin session and return to the homepage.
 @app.get("/admin-logout")
 def admin_logout():
-    """End the admin session."""
     session.pop("admin_logged_in", None)
     flash("You have been logged out.", "ok")
     return redirect(url_for("index"))
 
 
+# Render the admin page if the current session is authenticated.
 @app.get("/admin")
 def admin():
-    """Render the admin page if the user is authenticated."""
     if not is_admin_logged_in():
         return redirect(url_for("admin_login"))
+
     data = load_data()
     return render_template("admin.html", **data)
 
 
+# Add a new phrase after validating required fields,
+# uniqueness of the phrase ID, and the existence of at least one translation.
 @app.post("/admin/add_phrase")
 def add_phrase():
-    """Add a new phrase after validating input."""
     if not is_admin_logged_in():
         flash("Unauthorized access.", "error")
         return redirect(url_for("admin_login"))
@@ -129,9 +144,12 @@ def add_phrase():
     translations: Dict[str, str] = {}
     audio: Dict[str, str] = {}
 
+    # Collect translations and optional audio paths
+    # for all supported languages.
     for code in languages.keys():
         translation = (request.form.get(f"t_{code}") or "").strip()
         audio_path = (request.form.get(f"a_{code}") or "").strip()
+
         if translation:
             translations[code] = translation
         if audio_path:
@@ -141,6 +159,7 @@ def add_phrase():
         flash("Add at least one translation.", "error")
         return redirect(url_for("admin"))
 
+    # Normalize keyword input into a lowercase list.
     keywords = [k.strip().lower() for k in keywords_raw.split(",") if k.strip()]
 
     phrases.append(
@@ -158,9 +177,9 @@ def add_phrase():
     return redirect(url_for("admin"))
 
 
+# Delete an existing phrase by ID.
 @app.post("/admin/delete_phrase")
 def delete_phrase():
-    """Delete an existing phrase by ID."""
     if not is_admin_logged_in():
         flash("Unauthorized access.", "error")
         return redirect(url_for("admin_login"))
@@ -170,6 +189,7 @@ def delete_phrase():
     phrase_id = (request.form.get("id") or "").strip()
 
     updated_phrases = [p for p in phrases if p.get("id") != phrase_id]
+
     if len(updated_phrases) == len(phrases):
         flash("Phrase not found.", "error")
         return redirect(url_for("admin"))
@@ -179,9 +199,10 @@ def delete_phrase():
     return redirect(url_for("admin"))
 
 
+# Add a new word after validating required fields,
+# uniqueness of the word ID, and the existence of at least one translation.
 @app.post("/admin/add_word")
 def add_word():
-    """Add a new word after validating input."""
     if not is_admin_logged_in():
         flash("Unauthorized access.", "error")
         return redirect(url_for("admin_login"))
@@ -191,6 +212,7 @@ def add_word():
     languages = data["languages"]
 
     word_id = (request.form.get("id") or "").strip()
+
     if not word_id:
         flash("Word ID is required.", "error")
         return redirect(url_for("admin"))
@@ -200,6 +222,8 @@ def add_word():
         return redirect(url_for("admin"))
 
     translations: Dict[str, str] = {}
+
+    # Collect multilingual translations for the new word entry.
     for code in languages.keys():
         translation = (request.form.get(f"t_{code}") or "").strip()
         if translation:
@@ -215,9 +239,9 @@ def add_word():
     return redirect(url_for("admin"))
 
 
+# Delete an existing word by ID.
 @app.post("/admin/delete_word")
 def delete_word():
-    """Delete an existing word by ID."""
     if not is_admin_logged_in():
         flash("Unauthorized access.", "error")
         return redirect(url_for("admin_login"))
@@ -227,6 +251,7 @@ def delete_word():
     word_id = (request.form.get("id") or "").strip()
 
     updated_words = [w for w in words if w.get("id") != word_id]
+
     if len(updated_words) == len(words):
         flash("Word not found.", "error")
         return redirect(url_for("admin"))
@@ -236,22 +261,31 @@ def delete_word():
     return redirect(url_for("admin"))
 
 
+# Expose current application data as JSON.
+# Useful for frontend data loading and debugging.
 @app.get("/api/data")
 def api_data():
-    """Expose the current application data as JSON."""
     return jsonify(load_data())
 
 
+# Serve robots.txt from the static directory.
 @app.get("/robots.txt")
 def robots():
-    """Serve robots.txt from the static directory."""
     return send_from_directory(STATIC_DIR, "robots.txt")
 
 
+# Serve sitemap.xml from the static directory.
 @app.get("/sitemap.xml")
 def sitemap():
-    """Serve sitemap.xml from the static directory."""
     return send_from_directory(STATIC_DIR, "sitemap.xml")
+
+
+
+# Run the application locally.
+# Using localhost supports a more controlled local setup
+# and fits the intended offline/local-first usage better.
+#if __name__ == "__main__":
+    #app.run(host="127.0.0.1", port=5000, debug=True)
 
 
 if __name__ == "__main__":
