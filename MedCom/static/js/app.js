@@ -4,7 +4,7 @@
 // and voice input for smart search.
 
 (function () {
-  const data = window.MEDCOM_DATA;
+  const data = globalThis.MEDCOM_DATA;
   const languages = data.languages || {};
   const phrases = Array.isArray(data.phrases) ? data.phrases : [];
   const words = Array.isArray(data.words) ? data.words : [];
@@ -76,6 +76,77 @@
     return languages?.[state.patientLang]?.tts || state.patientLang || "en-US";
   }
 
+  function sortedCategoryKeys(groups, locale) {
+    return Object.keys(groups).sort((a, b) => a.localeCompare(b, locale));
+  }
+
+  function createPhraseButton(text, phrase) {
+    const btn = document.createElement("button");
+    btn.className = "phrase-btn";
+    btn.textContent = text;
+    btn.addEventListener("click", () => setSelected(phrase));
+    return btn;
+  }
+
+  function createCategorySection(titleText, phrasesInCategory, languageCode, isOpen = false) {
+    const section = document.createElement("div");
+    section.className = "category-section collapsible-section";
+
+    const toggle = document.createElement("button");
+    toggle.className = "category-toggle";
+    toggle.type = "button";
+    toggle.textContent = titleText;
+
+    const content = document.createElement("div");
+    content.className = "category-content";
+
+    if (!isOpen) {
+      content.classList.add("hidden");
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "phrase-grid centered-grid";
+
+    phrasesInCategory.forEach((phrase) => {
+      const buttonText = tFor(phrase, languageCode) || phrase.id;
+      const btn = createPhraseButton(buttonText, phrase);
+      grid.appendChild(btn);
+    });
+
+    toggle.addEventListener("click", () => {
+      content.classList.toggle("hidden");
+    });
+
+    content.appendChild(grid);
+    section.appendChild(toggle);
+    section.appendChild(content);
+
+    return section;
+  }
+
+  function createPhraseSideBox(roleTitle, languageCode, groups) {
+    const box = document.createElement("div");
+    box.className = "phrase-side-box";
+
+    const heading = document.createElement("div");
+    heading.className = "side-main-heading";
+    heading.textContent = `${roleTitle} (${langName(languageCode)})`;
+    box.appendChild(heading);
+
+    sortedCategoryKeys(groups, languageCode).forEach((cat, index) => {
+      const titleText = categoryName(cat, languageCode);
+      const section = createCategorySection(
+        titleText,
+        groups[cat],
+        languageCode,
+        index === 0
+      );
+      box.appendChild(section);
+    });
+
+    return box;
+  }
+
   // Populate the patient/staff language dropdowns
   // and connect them to the application state.
   function fillLanguages() {
@@ -134,79 +205,16 @@
     const groups = {};
     phrases.forEach((p) => {
       const category = p.category || "Other";
-      (groups[category] = groups[category] || []).push(p);
+      const categoryGroup = groups[category] || [];
+      categoryGroup.push(p);
+      groups[category] = categoryGroup;
     });
 
     const wrapper = document.createElement("div");
     wrapper.className = "dual-phrase-wrapper";
 
-    const patientBox = document.createElement("div");
-    patientBox.className = "phrase-side-box";
-
-    const patientTitle = document.createElement("div");
-    patientTitle.className = "side-main-heading";
-    patientTitle.textContent = `Patient (${langName(state.patientLang)})`;
-    patientBox.appendChild(patientTitle);
-
-    Object.keys(groups)
-      .sort()
-      .forEach((cat) => {
-        const section = document.createElement("div");
-        section.className = "category-section";
-
-        const title = document.createElement("div");
-        title.className = "section-title centered";
-        title.textContent = categoryName(cat, state.patientLang);
-
-        const grid = document.createElement("div");
-        grid.className = "phrase-grid centered-grid";
-
-        groups[cat].forEach((p) => {
-          const btn = document.createElement("button");
-          btn.className = "phrase-btn";
-          btn.textContent = tFor(p, state.patientLang) || p.id;
-          btn.addEventListener("click", () => setSelected(p));
-          grid.appendChild(btn);
-        });
-
-        section.appendChild(title);
-        section.appendChild(grid);
-        patientBox.appendChild(section);
-      });
-
-    const staffBox = document.createElement("div");
-    staffBox.className = "phrase-side-box";
-
-    const staffTitle = document.createElement("div");
-    staffTitle.className = "side-main-heading";
-    staffTitle.textContent = `Staff (${langName(state.staffLang)})`;
-    staffBox.appendChild(staffTitle);
-
-    Object.keys(groups)
-      .sort()
-      .forEach((cat) => {
-        const section = document.createElement("div");
-        section.className = "category-section";
-
-        const title = document.createElement("div");
-        title.className = "section-title centered";
-        title.textContent = categoryName(cat, state.staffLang);
-
-        const grid = document.createElement("div");
-        grid.className = "phrase-grid centered-grid";
-
-        groups[cat].forEach((p) => {
-          const btn = document.createElement("button");
-          btn.className = "phrase-btn";
-          btn.textContent = tFor(p, state.staffLang) || p.id;
-          btn.addEventListener("click", () => setSelected(p));
-          grid.appendChild(btn);
-        });
-
-        section.appendChild(title);
-        section.appendChild(grid);
-        staffBox.appendChild(section);
-      });
+    const patientBox = createPhraseSideBox("Patient", state.patientLang, groups);
+    const staffBox = createPhraseSideBox("Staff", state.staffLang, groups);
 
     wrapper.appendChild(patientBox);
     wrapper.appendChild(staffBox);
@@ -217,6 +225,7 @@
   // Otherwise, use the browser's text-to-speech as fallback.
   function playAudio() {
     if (!state.selected) return;
+
     const p = state.selected;
     const path = p?.audio?.[state.patientLang];
 
@@ -346,7 +355,7 @@
   // Initialize browser speech recognition for voice input in smart search.
   function initVoiceSearch() {
     const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
+      globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
       setVoiceStatus("Voice search is not supported in this browser.");
@@ -378,7 +387,9 @@
     };
 
     recognition.onerror = (event) => {
-      const message = event?.error ? `Voice search error: ${event.error}` : "Voice search failed.";
+      const message = event?.error
+        ? `Voice search error: ${event.error}`
+        : "Voice search failed.";
       setVoiceStatus(message);
     };
 
@@ -387,9 +398,11 @@
       if (startVoiceSearchBtn) startVoiceSearchBtn.disabled = false;
       if (stopVoiceSearchBtn) stopVoiceSearchBtn.disabled = true;
 
-      if (!voiceStatusEl?.textContent?.startsWith("Heard:")) {
-        setVoiceStatus("Voice search stopped.");
-      }
+      const statusText = voiceStatusEl?.textContent || "";
+      const alreadyHeardTranscript = statusText.startsWith("Heard:");
+
+      if (alreadyHeardTranscript) return;
+      setVoiceStatus("Voice search stopped.");
     };
 
     state.recognition = recognition;
@@ -429,8 +442,14 @@
     renderSuggestions();
     renderWords();
 
-    if (state.selected) setSelected(state.selected);
-    else if (phrases.length) setSelected(phrases[0]);
+    if (state.selected) {
+      setSelected(state.selected);
+      return;
+    }
+
+    if (phrases.length) {
+      setSelected(phrases[0]);
+    }
   }
 
   fillLanguages();
