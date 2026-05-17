@@ -416,6 +416,32 @@ select:focus{
   margin-top:4px;
 }
 
+/* Checkbox styling */
+.checkbox-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+  font-weight:600;
+  color:var(--muted);
+}
+
+.category-toggle{
+  width:100%;
+  padding:12px 14px;
+  border:none;
+  border-radius:14px;
+  background:var(--surface-2);
+  color:var(--text);
+  font-weight:800;
+  cursor:pointer;
+  text-align:center;
+}
+
+.category-content{
+  margin-top:10px;
+}
+
 /* Flash messages */
 .flash{
   padding:10px 12px;
@@ -431,3 +457,4 @@ select:focus{
 .flash.error{
   border-color:var(--error);
 }
+
