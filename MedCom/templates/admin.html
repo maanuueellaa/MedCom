@@ -42,30 +42,40 @@
       <form method="post" action="{{ url_for('add_phrase') }}">
         <div class="grid-2">
           <div>
-            <label>ID</label>
-            <input class="input" name="id" required placeholder="P10" />
+            <label for="phrase-id">ID</label>
+            <input id="phrase-id" class="input" name="id" required placeholder="P10" />
           </div>
 
           <div>
-            <label>Category</label>
-            <input class="input" name="category" required placeholder="Pain" />
+            <label for="phrase-category">Category</label>
+            <input id="phrase-category" class="input" name="category" required placeholder="Pain" />
           </div>
         </div>
 
-        <label>Keywords (comma separated)</label>
-        <input class="input" name="keywords" placeholder="pain, stomach, fever" />
+        <label for="phrase-keywords">Keywords (comma separated)</label>
+        <input id="phrase-keywords" class="input" name="keywords" placeholder="pain, stomach, fever" />
 
         <h3>Translations</h3>
         {% for code, info in languages.items() %}
           <div class="grid-2">
             <div>
-              <label>{{ info.name }} ({{ code }})</label>
-              <input class="input" name="t_{{ code }}" placeholder="Text..." />
+              <label for="phrase-translation-{{ code }}">{{ info.name }} ({{ code }})</label>
+              <input
+                id="phrase-translation-{{ code }}"
+                class="input"
+                name="t_{{ code }}"
+                placeholder="Text..."
+              />
             </div>
 
             <div>
-              <label>Audio path (optional)</label>
-              <input class="input" name="a_{{ code }}" placeholder="audio/P10_{{ code }}.mp3" />
+              <label for="phrase-audio-{{ code }}">Audio path (optional)</label>
+              <input
+                id="phrase-audio-{{ code }}"
+                class="input"
+                name="a_{{ code }}"
+                placeholder="audio/P10_{{ code }}.mp3"
+              />
             </div>
           </div>
         {% endfor %}
@@ -110,13 +120,18 @@
       <h2>Add Word</h2>
 
       <form method="post" action="{{ url_for('add_word') }}">
-        <label>ID</label>
-        <input class="input" name="id" required placeholder="W10" />
+        <label for="word-id">ID</label>
+        <input id="word-id" class="input" name="id" required placeholder="W10" />
 
         <h3>Translations</h3>
         {% for code, info in languages.items() %}
-          <label>{{ info.name }} ({{ code }})</label>
-          <input class="input" name="t_{{ code }}" placeholder="Word..." />
+          <label for="word-translation-{{ code }}">{{ info.name }} ({{ code }})</label>
+          <input
+            id="word-translation-{{ code }}"
+            class="input"
+            name="t_{{ code }}"
+            placeholder="Word..."
+          />
         {% endfor %}
 
         <button class="btn" type="submit">Add word</button>
