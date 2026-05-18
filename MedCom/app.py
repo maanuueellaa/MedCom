@@ -27,10 +27,20 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-# Admin credentials should be overridden in production
-# through environment variables.
+# Reusable file names and shared messages.
+# Using constants reduces duplication and improves maintainability.
+LANGUAGES_FILE = "languages.json"
+PHRASES_FILE = "phrases.json"
+WORDS_FILE = "words.json"
+UNAUTHORIZED_ACCESS_MESSAGE = "Unauthorized access."
+
+# Admin credentials should be provided through environment variables.
+# The password is intentionally not hardcoded in the source code.
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "OurStrongPassword321?")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
+
+if not ADMIN_PASSWORD:
+    raise RuntimeError("ADMIN_PASSWORD environment variable is required.")
 
 
 # Read a JSON file from the data directory
@@ -52,9 +62,9 @@ def write_json(filename: str, data: Any) -> None:
 # Load all application data needed by the UI and admin pages.
 def load_data() -> Dict[str, Any]:
     return {
-        "languages": read_json("languages.json"),
-        "phrases": read_json("phrases.json"),
-        "words": read_json("words.json"),
+        "languages": read_json(LANGUAGES_FILE),
+        "phrases": read_json(PHRASES_FILE),
+        "words": read_json(WORDS_FILE),
     }
 
 
@@ -71,7 +81,7 @@ def index():
 
 
 # Render the separate information page.
-# This page can later contain system description,
+# This page contains system description,
 # usage instructions, and project background.
 @app.get("/info")
 def info():
@@ -85,7 +95,7 @@ def admin_login():
         username = (request.form.get("username") or "").strip()
         password = (request.form.get("password") or "").strip()
 
-        # Compare credentials safely.
+        # Compare credentials safely to reduce timing-based leakage.
         username_ok = hmac.compare_digest(username, ADMIN_USERNAME)
         password_ok = hmac.compare_digest(password, ADMIN_PASSWORD)
 
@@ -122,7 +132,7 @@ def admin():
 @app.post("/admin/add_phrase")
 def add_phrase():
     if not is_admin_logged_in():
-        flash("Unauthorized access.", "error")
+        flash(UNAUTHORIZED_ACCESS_MESSAGE, "error")
         return redirect(url_for("admin_login"))
 
     data = load_data()
@@ -172,7 +182,7 @@ def add_phrase():
         }
     )
 
-    write_json("phrases.json", phrases)
+    write_json(PHRASES_FILE, phrases)
     flash("Phrase added.", "ok")
     return redirect(url_for("admin"))
 
@@ -181,7 +191,7 @@ def add_phrase():
 @app.post("/admin/delete_phrase")
 def delete_phrase():
     if not is_admin_logged_in():
-        flash("Unauthorized access.", "error")
+        flash(UNAUTHORIZED_ACCESS_MESSAGE, "error")
         return redirect(url_for("admin_login"))
 
     data = load_data()
@@ -194,7 +204,7 @@ def delete_phrase():
         flash("Phrase not found.", "error")
         return redirect(url_for("admin"))
 
-    write_json("phrases.json", updated_phrases)
+    write_json(PHRASES_FILE, updated_phrases)
     flash("Phrase deleted.", "ok")
     return redirect(url_for("admin"))
 
@@ -204,7 +214,7 @@ def delete_phrase():
 @app.post("/admin/add_word")
 def add_word():
     if not is_admin_logged_in():
-        flash("Unauthorized access.", "error")
+        flash(UNAUTHORIZED_ACCESS_MESSAGE, "error")
         return redirect(url_for("admin_login"))
 
     data = load_data()
@@ -234,7 +244,7 @@ def add_word():
         return redirect(url_for("admin"))
 
     words.append({"id": word_id, "translations": translations})
-    write_json("words.json", words)
+    write_json(WORDS_FILE, words)
     flash("Word added.", "ok")
     return redirect(url_for("admin"))
 
@@ -243,7 +253,7 @@ def add_word():
 @app.post("/admin/delete_word")
 def delete_word():
     if not is_admin_logged_in():
-        flash("Unauthorized access.", "error")
+        flash(UNAUTHORIZED_ACCESS_MESSAGE, "error")
         return redirect(url_for("admin_login"))
 
     data = load_data()
@@ -256,7 +266,7 @@ def delete_word():
         flash("Word not found.", "error")
         return redirect(url_for("admin"))
 
-    write_json("words.json", updated_words)
+    write_json(WORDS_FILE, updated_words)
     flash("Word deleted.", "ok")
     return redirect(url_for("admin"))
 
@@ -280,15 +290,11 @@ def sitemap():
     return send_from_directory(STATIC_DIR, "sitemap.xml")
 
 
-
-# Run the application locally.
-# Using localhost supports a more controlled local setup
-# and fits the intended offline/local-first usage better.
-#if __name__ == "__main__":
-    #app.run(host="127.0.0.1", port=5000, debug=True)
-
-
+# Run the application with an environment-controlled host.
+# The safer default is localhost for local development,
+# while deployment environments can override it with FLASK_HOST.
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     debug = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
-    app.run(host="0.0.0.0", port=port, debug=debug)
+    host = os.environ.get("FLASK_HOST", "127.0.0.1")
+    app.run(host=host, port=port, debug=debug)
