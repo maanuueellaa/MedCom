@@ -38,11 +38,11 @@
         <h2>Languages</h2>
         <div class="grid-2">
           <div>
-            <label>Patient language</label>
+            <label for="patientLang">Patient language</label>
             <select id="patientLang"></select>
           </div>
           <div>
-            <label>Staff language</label>
+            <label for="staffLang">Staff language</label>
             <select id="staffLang"></select>
           </div>
         </div>
@@ -67,29 +67,6 @@
       </section>
     </section>
 
-    <!-- Middle support area:
-         word lookup and recent phrases are shown side by side
-         to reduce vertical scrolling -->
-    <section class="support-grid">
-      <section class="card compact-card">
-        <h2>Word Lookup</h2>
-        <input id="wordSearch" class="input" placeholder="Search a word..." />
-        <div id="wordResults" class="word-results"></div>
-      </section>
-
-      <section class="card compact-card">
-        <h2>Recent Phrases</h2>
-        <div id="recent" class="chips"></div>
-      </section>
-    </section>
-
-    <!-- Phrase library:
-         this remains one of the main interaction areas -->
-    <section class="card">
-      <h2>Phrases by Category</h2>
-      <div id="categories"></div>
-    </section>
-
     <!-- Translation output:
          shows the currently selected phrase in both languages -->
     <section class="card">
@@ -112,6 +89,29 @@
       </div>
 
       <audio id="audioPlayer" controls class="audio hidden"></audio>
+    </section>
+
+    <!-- Middle support area:
+         word lookup and recent phrases are shown side by side
+         to reduce vertical scrolling -->
+    <section class="support-grid">
+      <section class="card compact-card">
+        <h2>Word Lookup</h2>
+        <input id="wordSearch" class="input" placeholder="Search a word..." />
+        <div id="wordResults" class="word-results"></div>
+      </section>
+
+      <section class="card compact-card">
+        <h2>Recent Phrases</h2>
+        <div id="recent" class="chips"></div>
+      </section>
+    </section>
+
+    <!-- Phrase library:
+         categories are shown below the main result area -->
+    <section class="card">
+      <h2>Phrases by Category</h2>
+      <div id="categories"></div>
     </section>
   </main>
 
