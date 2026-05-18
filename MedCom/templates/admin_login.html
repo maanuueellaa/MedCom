@@ -39,11 +39,15 @@
       <h2>Admin Access</h2>
 
       <form method="post">
-        <label>Username</label>
-        <input class="input" type="text" name="username" required>
+        <label for="admin-username">Username</label>
+        <input id="admin-username" class="input" type="text" name="username" required>
 
-        <label>Password</label>
-        <input class="input" type="password" name="password" required>
+        <label for="admin-password">Password</label>
+        <input id="admin-password" class="input" type="password" name="password" required>
+
+        <label for="show-password" class="checkbox-label">
+          <input id="show-password" type="checkbox" onclick="togglePasswordVisibility()">
+          Show password
 
         <div class="actions">
           <button class="btn" type="submit">Log in</button>
@@ -51,5 +55,14 @@
       </form>
     </section>
   </main>
+
+  <script>
+    // Toggle password visibility when the checkbox is clicked
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('admin-password');
+      const showPasswordCheckbox = document.getElementById('show-password');
+      passwordInput.type = showPasswordCheckbox.checked ? 'text' : 'password';
+    }
+  </script>
 </body>
 </html>
