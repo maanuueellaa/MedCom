@@ -1,5 +1,5 @@
-// Frontend logic for MedCom:
-// handles language selection, phrase rendering, translation display,
+// Frontend logic for MedCom
+// Handles language selection, phrase rendering, translation display,
 // recent phrase history, smart search, word lookup, optional audio playback,
 // and voice input for smart search.
 
@@ -43,14 +43,7 @@
   const tFor = (obj, code) => obj?.translations?.[code] || "";
 
   const categoryLabels = {
-    Greetings: {
-      sv: "Hälsning/Frågor",
-      en: "Greetings/Questions",
-      fr: "Salutations/Questions",
-      sq: "Përshëndetje/Pyetje",
-      ar: "التحية/الأسئلة",
-      ru: "Приветствия/Вопросы",
-    },
+    Greetings: { sv: "Hälsning/Frågor", en: "Greetings/Questions", fr: "Salutations/Questions", sq: "Përshëndetje/Pyetje", ar: "التحية/الأسئلة", ru: "Приветствия/Вопросы" },
     Head: { sv: "Huvud", en: "Head", fr: "Tête", sq: "Kokë", ar: "الرأس", ru: "Голова" },
     Brain: { sv: "Hjärna", en: "Brain", fr: "Cerveau", sq: "Truri", ar: "الدماغ", ru: "Мозг" },
     Eye: { sv: "Öga", en: "Eye", fr: "Œil", sq: "Syri", ar: "العين", ru: "Глаз" },
@@ -67,19 +60,25 @@
 
   const categoryName = (cat, code) => categoryLabels?.[cat]?.[code] || cat;
 
+  // --- UI helper functions ---
+
+  // Sets the voice search status message
   function setVoiceStatus(message) {
     if (!voiceStatusEl) return;
     voiceStatusEl.textContent = message;
   }
 
+  // Returns the correct locale for speech recognition
   function speechLocaleForSearch() {
     return languages?.[state.patientLang]?.tts || state.patientLang || "en-US";
   }
 
+  // Sorts category keys alphabetically
   function sortedCategoryKeys(groups, locale) {
     return Object.keys(groups).sort((a, b) => a.localeCompare(b, locale));
   }
 
+  // Creates a clickable phrase button
   function createPhraseButton(text, phrase) {
     const btn = document.createElement("button");
     btn.className = "phrase-btn";
@@ -88,6 +87,7 @@
     return btn;
   }
 
+  // Creates a collapsible section for a category
   function createCategorySection(titleText, phrasesInCategory, languageCode, isOpen = false) {
     const section = document.createElement("div");
     section.className = "category-section collapsible-section";
@@ -99,23 +99,14 @@
 
     const content = document.createElement("div");
     content.className = "category-content";
-
-    if (!isOpen) {
-      content.classList.add("hidden");
-    }
+    if (!isOpen) content.classList.add("hidden");
 
     const grid = document.createElement("div");
     grid.className = "phrase-grid centered-grid";
 
-    phrasesInCategory.forEach((phrase) => {
-      const buttonText = tFor(phrase, languageCode) || phrase.id;
-      const btn = createPhraseButton(buttonText, phrase);
-      grid.appendChild(btn);
-    });
+    phrasesInCategory.forEach(p => grid.appendChild(createPhraseButton(tFor(p, languageCode) || p.id, p)));
 
-    toggle.addEventListener("click", () => {
-      content.classList.toggle("hidden");
-    });
+    toggle.addEventListener("click", () => content.classList.toggle("hidden"));
 
     content.appendChild(grid);
     section.appendChild(toggle);
@@ -124,6 +115,7 @@
     return section;
   }
 
+  // Creates a side box for patient or staff phrases
   function createPhraseSideBox(roleTitle, languageCode, groups) {
     const box = document.createElement("div");
     box.className = "phrase-side-box";
@@ -134,26 +126,20 @@
     box.appendChild(heading);
 
     sortedCategoryKeys(groups, languageCode).forEach((cat, index) => {
-      const titleText = categoryName(cat, languageCode);
-      const section = createCategorySection(
-        titleText,
-        groups[cat],
-        languageCode,
-        index === 0
-      );
-      box.appendChild(section);
+      box.appendChild(createCategorySection(categoryName(cat, languageCode), groups[cat], languageCode, index === 0));
     });
 
     return box;
   }
 
-  // Populate the patient/staff language dropdowns
-  // and connect them to the application state.
+  // --- Core functions ---
+
+  // Populate the language selectors for patient and staff
   function fillLanguages() {
     patientLangSel.innerHTML = "";
     staffLangSel.innerHTML = "";
 
-    Object.keys(languages).forEach((code) => {
+    Object.keys(languages).forEach(code => {
       const patientOption = document.createElement("option");
       patientOption.value = code;
       patientOption.textContent = `${langName(code)} (${code})`;
@@ -183,9 +169,7 @@
     });
   }
 
-  // Update the currently selected phrase,
-  // show both translations, store it in recent history,
-  // and reset audio playback.
+  // Updates the currently selected phrase and recent history
   function setSelected(p) {
     state.selected = p;
     patientTextEl.textContent = tFor(p, state.patientLang) || p.id;
@@ -197,35 +181,28 @@
     audioPlayer.removeAttribute("src");
   }
 
-  // Render the phrase library in two parallel columns
-  // so both patient and staff can initiate communication.
+  // Render all phrase categories as collapsible panels
   function renderCategories() {
     categoriesEl.innerHTML = "";
 
     const groups = {};
-    phrases.forEach((p) => {
-      const category = p.category || "Other";
-      const categoryGroup = groups[category] || [];
-      categoryGroup.push(p);
-      groups[category] = categoryGroup;
+    phrases.forEach(p => {
+      const cat = p.category || "Other";
+      (groups[cat] = groups[cat] || []).push(p);
     });
 
     const wrapper = document.createElement("div");
     wrapper.className = "dual-phrase-wrapper";
 
-    const patientBox = createPhraseSideBox("Patient", state.patientLang, groups);
-    const staffBox = createPhraseSideBox("Staff", state.staffLang, groups);
+    wrapper.appendChild(createPhraseSideBox("Patient", state.patientLang, groups));
+    wrapper.appendChild(createPhraseSideBox("Staff", state.staffLang, groups));
 
-    wrapper.appendChild(patientBox);
-    wrapper.appendChild(staffBox);
     categoriesEl.appendChild(wrapper);
   }
 
-  // Play prerecorded audio for the selected phrase if available.
-  // Otherwise, use the browser's text-to-speech as fallback.
+  // Play prerecorded audio or TTS for selected phrase
   function playAudio() {
     if (!state.selected) return;
-
     const p = state.selected;
     const path = p?.audio?.[state.patientLang];
 
@@ -245,7 +222,7 @@
     speechSynthesis.speak(utterance);
   }
 
-  // Load recently selected phrase IDs from localStorage.
+  // Load recent phrases from localStorage
   function loadRecent() {
     try {
       const raw = localStorage.getItem(RECENT_KEY);
@@ -256,29 +233,22 @@
     }
   }
 
-  // Add a phrase to recent history, avoid duplicates,
-  // and keep only the five most recent entries.
+  // Add a phrase to recent history
   function pushRecent(id) {
-    const ids = loadRecent().filter((x) => x !== id);
+    const ids = loadRecent().filter(x => x !== id);
     ids.unshift(id);
     localStorage.setItem(RECENT_KEY, JSON.stringify(ids.slice(0, 5)));
     renderRecent();
   }
 
-  // Render the recent phrase history as clickable chips.
+  // Render recent phrases
   function renderRecent() {
     recentEl.innerHTML = "";
     const ids = loadRecent();
-
-    if (!ids.length) {
-      recentEl.textContent = "No recent phrases.";
-      return;
-    }
-
-    ids.forEach((id) => {
-      const p = phrases.find((x) => x.id === id);
+    if (!ids.length) { recentEl.textContent = "No recent phrases."; return; }
+    ids.forEach(id => {
+      const p = phrases.find(x => x.id === id);
       if (!p) return;
-
       const chip = document.createElement("div");
       chip.className = "chip";
       chip.textContent = tFor(p, state.patientLang) || id;
@@ -287,80 +257,55 @@
     });
   }
 
+  // Check if phrase matches a query
   function phraseMatches(p, q) {
     const query = q.trim().toLowerCase();
     if (!query) return false;
-
     const keywords = Array.isArray(p.keywords) ? p.keywords : [];
-    if (keywords.some((k) => String(k).toLowerCase().includes(query))) {
-      return true;
-    }
-
-    return Object.values(p.translations || {}).some((v) =>
-      String(v).toLowerCase().includes(query)
-    );
+    return keywords.some(k => k.toLowerCase().includes(query)) ||
+      Object.values(p.translations || {}).some(v => String(v).toLowerCase().includes(query));
   }
 
-  // Render keyword-based phrase suggestions from short free-text input.
+  // Render suggested phrases for smart search
   function renderSuggestions() {
     if (!smartSearch || !suggestionsEl) return;
-
     suggestionsEl.innerHTML = "";
     const q = smartSearch.value.trim();
     if (!q) return;
 
-    phrases
-      .filter((p) => phraseMatches(p, q))
-      .slice(0, 8)
-      .forEach((p) => {
-        const chip = document.createElement("div");
-        chip.className = "chip";
-        chip.textContent = tFor(p, state.patientLang) || p.id;
-        chip.addEventListener("click", () => setSelected(p));
-        suggestionsEl.appendChild(chip);
-      });
+    phrases.filter(p => phraseMatches(p, q)).slice(0, 8).forEach(p => {
+      const chip = document.createElement("div");
+      chip.className = "chip";
+      chip.textContent = tFor(p, state.patientLang) || p.id;
+      chip.addEventListener("click", () => setSelected(p));
+      suggestionsEl.appendChild(chip);
+    });
   }
 
-  // Render the searchable multilingual word list.
+  // Render multilingual word list
   function renderWords() {
     if (!wordSearch || !wordResults) return;
-
     wordResults.innerHTML = "";
     const q = (wordSearch.value || "").trim().toLowerCase();
-
-    const filtered = !q
-      ? words.slice(0, 30)
-      : words.filter((w) =>
-          Object.values(w.translations || {}).some((v) =>
-            String(v).toLowerCase().includes(q)
-          )
-        );
-
-    if (!filtered.length) {
-      wordResults.textContent = "No words found.";
-      return;
-    }
-
-    filtered.slice(0, 50).forEach((w) => {
+    const filtered = !q ? words.slice(0, 30) :
+      words.filter(w => Object.values(w.translations || {}).some(v => String(v).toLowerCase().includes(q)));
+    if (!filtered.length) { wordResults.textContent = "No words found."; return; }
+    filtered.slice(0, 50).forEach(w => {
       const row = document.createElement("div");
       row.className = "word-row";
-      row.innerHTML = `
-        <div><strong>${tFor(w, state.patientLang) || w.id}</strong><br><small>${w.id}</small></div>
-        <div><strong>${tFor(w, state.staffLang) || ""}</strong><br><small>${langName(state.staffLang)}</small></div>
-      `;
+      row.innerHTML = `<div><strong>${tFor(w,state.patientLang)||w.id}</strong><br><small>${w.id}</small></div>
+                       <div><strong>${tFor(w,state.staffLang)||""}</strong><br><small>${langName(state.staffLang)}</small></div>`;
       wordResults.appendChild(row);
     });
   }
 
-  // Initialize browser speech recognition for voice input in smart search.
+  // Initialize voice search functionality
   function initVoiceSearch() {
-    const SpeechRecognition =
-      globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition;
-
+    const SpeechRecognition = globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       setVoiceStatus("Voice search is not supported in this browser.");
-      if (startVoiceSearchBtn) startVoiceSearchBtn.disabled = true;
-      if (stopVoiceSearchBtn) stopVoiceSearchBtn.disabled = true;
+      if(startVoiceSearchBtn) startVoiceSearchBtn.disabled=true;
+      if(stopVoiceSearchBtn) stopVoiceSearchBtn.disabled=true;
       return;
     }
 
@@ -380,16 +325,13 @@
     recognition.onresult = (event) => {
       const transcript = event?.results?.[0]?.[0]?.transcript?.trim() || "";
       if (!transcript || !smartSearch) return;
-
       smartSearch.value = transcript;
       renderSuggestions();
       setVoiceStatus(`Heard: ${transcript}`);
     };
 
     recognition.onerror = (event) => {
-      const message = event?.error
-        ? `Voice search error: ${event.error}`
-        : "Voice search failed.";
+      const message = event?.error ? `Voice search error: ${event.error}` : "Voice search failed.";
       setVoiceStatus(message);
     };
 
@@ -397,12 +339,7 @@
       state.isListening = false;
       if (startVoiceSearchBtn) startVoiceSearchBtn.disabled = false;
       if (stopVoiceSearchBtn) stopVoiceSearchBtn.disabled = true;
-
-      const statusText = voiceStatusEl?.textContent || "";
-      const alreadyHeardTranscript = statusText.startsWith("Heard:");
-
-      if (alreadyHeardTranscript) return;
-      setVoiceStatus("Voice search stopped.");
+      if (!(voiceStatusEl?.textContent || "").startsWith("Heard:")) setVoiceStatus("Voice search stopped.");
     };
 
     state.recognition = recognition;
@@ -420,38 +357,28 @@
       stopVoiceSearchBtn.addEventListener("click", () => {
         if (!state.recognition || !state.isListening) return;
         state.recognition.stop();
+        stopVoiceSearchBtn.disabled = true;
       });
-      stopVoiceSearchBtn.disabled = true;
     }
 
     setVoiceStatus("Voice search is ready.");
   }
 
+  // Update recognition language dynamically
   function updateRecognitionLanguage() {
     if (!state.recognition) return;
     state.recognition.lang = speechLocaleForSearch();
   }
 
-  // Re-render the main UI based on current state and language selection.
+  // Render the full UI based on current state and language
   function renderAll() {
-    document.documentElement.dir =
-      languages?.[state.patientLang]?.direction || "ltr";
-
-    renderCategories();
-    renderRecent();
-    renderSuggestions();
-    renderWords();
-
-    if (state.selected) {
-      setSelected(state.selected);
-      return;
-    }
-
-    if (phrases.length) {
-      setSelected(phrases[0]);
-    }
+    document.documentElement.dir = languages?.[state.patientLang]?.direction || "ltr";
+    renderCategories(); renderRecent(); renderSuggestions(); renderWords();
+    if(state.selected){setSelected(state.selected); return;}
+    if(phrases.length) setSelected(phrases[0]);
   }
 
+  // --- Initialize app ---
   fillLanguages();
   initVoiceSearch();
   renderAll();
@@ -459,4 +386,5 @@
   playBtn?.addEventListener("click", playAudio);
   smartSearch?.addEventListener("input", renderSuggestions);
   wordSearch?.addEventListener("input", renderWords);
+
 })();
