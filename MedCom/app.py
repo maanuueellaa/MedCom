@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import hmac
 import json
 import os
@@ -17,9 +16,8 @@ from flask import (
     send_from_directory,
 )
 
-# Backend entry point for MedCom.
-# Loads local JSON data, serves the user/admin pages,
-# and handles authenticated content management.
+# Backend entry point for MedCom
+# Loads JSON data, serves the UI/admin pages, handles authentication and ID auto-generation
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret")
 
@@ -27,39 +25,34 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-# Reusable file names and shared messages.
-# Using constants reduces duplication and improves maintainability.
+# Reusable constants for files and messages
 LANGUAGES_FILE = "languages.json"
 PHRASES_FILE = "phrases.json"
 WORDS_FILE = "words.json"
 UNAUTHORIZED_ACCESS_MESSAGE = "Unauthorized access."
 
-# Admin credentials should be provided through environment variables.
-# The password is intentionally not hardcoded in the source code.
+# Admin credentials set via environment variables
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
-
 if not ADMIN_PASSWORD:
     raise RuntimeError("ADMIN_PASSWORD environment variable is required.")
 
 
+# --- File I/O functions ---
+
 # Read a JSON file from the data directory
-# and return its parsed contents.
 def read_json(filename: str) -> Any:
     path = os.path.join(DATA_DIR, filename)
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-
-# Write structured data back to a JSON file
-# using UTF-8 and readable indentation.
+# Write structured data to a JSON file
 def write_json(filename: str, data: Any) -> None:
     path = os.path.join(DATA_DIR, filename)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-
-# Load all application data needed by the UI and admin pages.
+# Load all data needed by frontend/admin pages
 def load_data() -> Dict[str, Any]:
     return {
         "languages": read_json(LANGUAGES_FILE),
@@ -68,34 +61,40 @@ def load_data() -> Dict[str, Any]:
     }
 
 
-# Check whether the current session has unlocked admin access.
+# --- Session / authentication functions ---
+
+# Check if the current session has admin access
 def is_admin_logged_in() -> bool:
     return bool(session.get("admin_logged_in", False))
 
+# Generate the next available ID for phrases or words
+def get_next_id(items: list, prefix: str) -> str:
+    existing_ids = [i.get("id", "") for i in items]
+    numbers = [int(i[len(prefix):]) for i in existing_ids if i.startswith(prefix) and i[len(prefix):].isdigit()]
+    next_num = max(numbers, default=0) + 1
+    return f"{prefix}{next_num}"
 
-# Render the main homepage with languages, phrases, and words.
+
+# --- Routes ---
+
+# Render the main homepage with phrases, words, and languages
 @app.get("/")
 def index():
     data = load_data()
     return render_template("index.html", **data)
 
-
-# Render the separate information page.
-# This page contains system description,
-# usage instructions, and project background.
+# Render the info page containing system description
 @app.get("/info")
 def info():
     return render_template("info.html")
 
-
-# Handle admin login through username and password.
+# Handle admin login
 @app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
         username = (request.form.get("username") or "").strip()
         password = (request.form.get("password") or "").strip()
 
-        # Compare credentials safely to reduce timing-based leakage.
         username_ok = hmac.compare_digest(username, ADMIN_USERNAME)
         password_ok = hmac.compare_digest(password, ADMIN_PASSWORD)
 
@@ -103,32 +102,26 @@ def admin_login():
             session["admin_logged_in"] = True
             flash("Admin access granted.", "ok")
             return redirect(url_for("admin"))
-
         flash("Invalid username or password.", "error")
 
     return render_template("admin_login.html")
 
-
-# End the admin session and return to the homepage.
+# Log out admin and clear session
 @app.get("/admin-logout")
 def admin_logout():
     session.pop("admin_logged_in", None)
     flash("You have been logged out.", "ok")
     return redirect(url_for("index"))
 
-
-# Render the admin page if the current session is authenticated.
+# Render admin page with phrase and word management
 @app.get("/admin")
 def admin():
     if not is_admin_logged_in():
         return redirect(url_for("admin_login"))
-
     data = load_data()
     return render_template("admin.html", **data)
 
-
-# Add a new phrase after validating required fields,
-# uniqueness of the phrase ID, and the existence of at least one translation.
+# Add a new phrase
 @app.post("/admin/add_phrase")
 def add_phrase():
     if not is_admin_logged_in():
@@ -139,12 +132,13 @@ def add_phrase():
     phrases = data["phrases"]
     languages = data["languages"]
 
-    phrase_id = (request.form.get("id") or "").strip()
+    # Automatically generate phrase ID if not provided
+    phrase_id = (request.form.get("id") or "").strip() or get_next_id(phrases, "P")
     category = (request.form.get("category") or "").strip()
     keywords_raw = (request.form.get("keywords") or "").strip()
 
-    if not phrase_id or not category:
-        flash("Phrase ID and category are required.", "error")
+    if not category:
+        flash("Category is required.", "error")
         return redirect(url_for("admin"))
 
     if any(p.get("id") == phrase_id for p in phrases):
@@ -154,12 +148,10 @@ def add_phrase():
     translations: Dict[str, str] = {}
     audio: Dict[str, str] = {}
 
-    # Collect translations and optional audio paths
-    # for all supported languages.
+    # Collect translations and audio paths
     for code in languages.keys():
         translation = (request.form.get(f"t_{code}") or "").strip()
         audio_path = (request.form.get(f"a_{code}") or "").strip()
-
         if translation:
             translations[code] = translation
         if audio_path:
@@ -169,25 +161,16 @@ def add_phrase():
         flash("Add at least one translation.", "error")
         return redirect(url_for("admin"))
 
-    # Normalize keyword input into a lowercase list.
     keywords = [k.strip().lower() for k in keywords_raw.split(",") if k.strip()]
 
     phrases.append(
-        {
-            "id": phrase_id,
-            "category": category,
-            "translations": translations,
-            "audio": audio,
-            "keywords": keywords,
-        }
+        {"id": phrase_id, "category": category, "translations": translations, "audio": audio, "keywords": keywords}
     )
-
     write_json(PHRASES_FILE, phrases)
     flash("Phrase added.", "ok")
     return redirect(url_for("admin"))
 
-
-# Delete an existing phrase by ID.
+# Delete a phrase by ID
 @app.post("/admin/delete_phrase")
 def delete_phrase():
     if not is_admin_logged_in():
@@ -199,7 +182,6 @@ def delete_phrase():
     phrase_id = (request.form.get("id") or "").strip()
 
     updated_phrases = [p for p in phrases if p.get("id") != phrase_id]
-
     if len(updated_phrases) == len(phrases):
         flash("Phrase not found.", "error")
         return redirect(url_for("admin"))
@@ -208,9 +190,7 @@ def delete_phrase():
     flash("Phrase deleted.", "ok")
     return redirect(url_for("admin"))
 
-
-# Add a new word after validating required fields,
-# uniqueness of the word ID, and the existence of at least one translation.
+# Add a new word
 @app.post("/admin/add_word")
 def add_word():
     if not is_admin_logged_in():
@@ -221,19 +201,13 @@ def add_word():
     words = data["words"]
     languages = data["languages"]
 
-    word_id = (request.form.get("id") or "").strip()
-
-    if not word_id:
-        flash("Word ID is required.", "error")
-        return redirect(url_for("admin"))
-
+    # Automatically generate word ID if not provided
+    word_id = (request.form.get("id") or "").strip() or get_next_id(words, "W")
     if any(w.get("id") == word_id for w in words):
         flash("Word ID already exists.", "error")
         return redirect(url_for("admin"))
 
     translations: Dict[str, str] = {}
-
-    # Collect multilingual translations for the new word entry.
     for code in languages.keys():
         translation = (request.form.get(f"t_{code}") or "").strip()
         if translation:
@@ -248,8 +222,7 @@ def add_word():
     flash("Word added.", "ok")
     return redirect(url_for("admin"))
 
-
-# Delete an existing word by ID.
+# Delete a word by ID
 @app.post("/admin/delete_word")
 def delete_word():
     if not is_admin_logged_in():
@@ -261,7 +234,6 @@ def delete_word():
     word_id = (request.form.get("id") or "").strip()
 
     updated_words = [w for w in words if w.get("id") != word_id]
-
     if len(updated_words) == len(words):
         flash("Word not found.", "error")
         return redirect(url_for("admin"))
@@ -270,29 +242,22 @@ def delete_word():
     flash("Word deleted.", "ok")
     return redirect(url_for("admin"))
 
-
-# Expose current application data as JSON.
-# Useful for frontend data loading and debugging.
+# API endpoint for frontend data
 @app.get("/api/data")
 def api_data():
     return jsonify(load_data())
 
-
-# Serve robots.txt from the static directory.
+# Serve robots.txt file
 @app.get("/robots.txt")
 def robots():
     return send_from_directory(STATIC_DIR, "robots.txt")
 
-
-# Serve sitemap.xml from the static directory.
+# Serve sitemap.xml file
 @app.get("/sitemap.xml")
 def sitemap():
     return send_from_directory(STATIC_DIR, "sitemap.xml")
 
-
-# Run the application with an environment-controlled host.
-# The safer default is localhost for local development,
-# while deployment environments can override it with FLASK_HOST.
+# Run the app locally or via deployment host
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     debug = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
