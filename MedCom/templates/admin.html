@@ -21,8 +21,7 @@
   </header>
 
   <main class="container">
-    <!-- Flash messages:
-         shows success or error feedback after admin actions -->
+    <!-- Flash messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <section class="card">
@@ -33,17 +32,15 @@
       {% endif %}
     {% endwith %}
 
-    <!-- Add phrase form:
-         allows the admin to create a new phrase with category,
-         keywords, translations, and optional audio paths -->
+    <!-- Add phrase form -->
     <section class="card">
       <h2>Add Phrase</h2>
 
       <form method="post" action="{{ url_for('add_phrase') }}">
         <div class="grid-2">
           <div>
-            <label for="phrase-id">ID</label>
-            <input id="phrase-id" class="input" name="id" required placeholder="P10" />
+            <label for="phrase-id">ID (auto-generated)</label>
+            <input id="phrase-id" class="input" name="id" placeholder="Auto (P1, P2…)" readonly />
           </div>
 
           <div>
@@ -57,7 +54,7 @@
 
         <h3>Translations</h3>
         {% for code, info in languages.items() %}
-          <div class="grid-2">
+          <div class="grid-2 translation-row">
             <div>
               <label for="phrase-translation-{{ code }}">{{ info.name }} ({{ code }})</label>
               <input
@@ -74,7 +71,7 @@
                 id="phrase-audio-{{ code }}"
                 class="input"
                 name="a_{{ code }}"
-                placeholder="audio/P10_{{ code }}.mp3"
+                placeholder="audio/P1_{{ code }}.mp3"
               />
             </div>
           </div>
@@ -84,14 +81,13 @@
       </form>
     </section>
 
-    <!-- Current phrase list:
-         shows all stored phrases and allows deletion by ID -->
+    <!-- Current phrase list -->
     <section class="card">
       <h2>Current Phrases</h2>
 
       <div class="admin-list">
         {% for phrase in phrases %}
-          <div class="admin-item">
+          <div class="admin-item" role="region" aria-label="Phrase {{ phrase.id }}">
             <div>
               <strong>{{ phrase.id }}</strong>
               <div class="admin-meta">{{ phrase.category or 'Other' }}</div>
@@ -113,15 +109,13 @@
       </div>
     </section>
 
-    <!-- Add word form:
-         allows the admin to create a new word entry
-         with translations in supported languages -->
+    <!-- Add word form -->
     <section class="card">
       <h2>Add Word</h2>
 
       <form method="post" action="{{ url_for('add_word') }}">
-        <label for="word-id">ID</label>
-        <input id="word-id" class="input" name="id" required placeholder="W10" />
+        <label for="word-id">ID (auto-generated)</label>
+        <input id="word-id" class="input" name="id" placeholder="Auto (W1, W2…)" readonly />
 
         <h3>Translations</h3>
         {% for code, info in languages.items() %}
@@ -138,14 +132,13 @@
       </form>
     </section>
 
-    <!-- Current word list:
-         shows all stored words and allows deletion by ID -->
+    <!-- Current word list -->
     <section class="card">
       <h2>Current Words</h2>
 
       <div class="admin-list">
         {% for word in words %}
-          <div class="admin-item">
+          <div class="admin-item" role="region" aria-label="Word {{ word.id }}">
             <div>
               <strong>{{ word.id }}</strong>
               <div class="admin-meta">
