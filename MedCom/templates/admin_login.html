@@ -20,8 +20,7 @@
   </header>
 
   <main class="container">
-    <!-- Flash messages:
-         shows login errors or other status feedback -->
+    <!-- Flash messages: shows login errors or other status feedback -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <section class="card">
@@ -32,9 +31,7 @@
       {% endif %}
     {% endwith %}
 
-    <!-- Admin login form:
-         requires a valid username and password
-         before the admin page can be accessed -->
+    <!-- Admin login form -->
     <section class="card">
       <h2>Admin Access</h2>
 
@@ -45,8 +42,16 @@
         <label for="admin-password">Password</label>
         <input id="admin-password" class="input" type="password" name="password" required>
 
+        <!-- Accessibility fix applied here -->
         <label for="show-password" class="checkbox-label">
-          <input id="show-password" type="checkbox" onclick="togglePasswordVisibility()">
+          <input 
+            id="show-password" 
+            type="checkbox" 
+            onclick="togglePasswordVisibility()" 
+            onkeypress="togglePasswordVisibility()" 
+            onkeydown="togglePasswordVisibility()" 
+            onkeyup="togglePasswordVisibility()"
+          >
           Show password
         </label>
 
@@ -58,7 +63,7 @@
   </main>
 
   <script>
-    // Toggle password visibility when the checkbox is clicked
+    // Toggle password visibility when the checkbox is clicked or keyboard events occur
     function togglePasswordVisibility() {
       const passwordInput = document.getElementById('admin-password');
       const showPasswordCheckbox = document.getElementById('show-password');
