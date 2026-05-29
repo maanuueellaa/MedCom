@@ -124,16 +124,14 @@ body{
   font-size:22px;
 }
 
-/* Top dashboard:
-   language selection and smart search side by side */
+/* Top dashboard */
 .top-dashboard{
   display:grid;
   grid-template-columns:1fr 1.2fr;
   gap:18px;
 }
 
-/* Support section:
-   word lookup and recent phrases side by side */
+/* Support section */
 .support-grid{
   display:grid;
   grid-template-columns:1.2fr 0.8fr;
@@ -161,6 +159,7 @@ label{
   color:var(--muted);
 }
 
+/* Inputs and selects with focus state */
 .input,
 select{
   width:100%;
@@ -177,7 +176,7 @@ select{
 select:focus{
   outline:none;
   border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(79, 143, 191, 0.16);
+  box-shadow:0 0 0 3px rgba(79, 143, 191, 0.3);
 }
 
 .grid-2{
@@ -240,7 +239,7 @@ select:focus{
   font-weight:600;
 }
 
-/* Chip-based small selectable items */
+/* Chip-based items */
 .chips{
   display:flex;
   flex-wrap:wrap;
@@ -255,12 +254,13 @@ select:focus{
   background:var(--chip);
   color:var(--text);
   cursor:pointer;
-  transition:0.2s ease;
+  transition:0.2s ease, transform 0.2s ease;
   font-weight:600;
 }
 
 .chip:hover{
   background:var(--chip-hover);
+  transform:translateY(-1px);
 }
 
 /* Phrase category layout */
@@ -330,7 +330,7 @@ select:focus{
   color:var(--text);
   cursor:pointer;
   text-align:center;
-  transition:0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
   font-weight:600;
 }
 
@@ -457,4 +457,3 @@ select:focus{
 .flash.error{
   border-color:var(--error);
 }
-
