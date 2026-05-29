@@ -53,10 +53,10 @@ The current version includes:
 7. Install all the dependencies: 
 - pip install -r requirements.txt
 8. Set your admin password for the session with this command;
-Windows:
-$env:ADMIN_PASSWORD="YourStrongPassword123!"
-macOS/Linux:
-export ADMIN_PASSWORD="YourStrongPassword123!"
+- Windows:
+- $env:ADMIN_PASSWORD="YourStrongPassword123!"
+- macOS/Linux:
+- export ADMIN_PASSWORD="YourStrongPassword123!"
 9. Run the application with: 
 - Windows python app.py
 - macOS/Linux: python3 app.py
